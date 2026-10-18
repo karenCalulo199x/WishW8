@@ -1,0 +1,25 @@
+*.iml
+.gradle
+/local.properties
+/.idea
+.DS_Store
+/build
+/app/build
+/captures
+.externalNativeBuild
+.cxx
+*.jks
+*.keystore
+# Release signing secrets
+keystore.properties
+
+# Kotlin compiler cache
+.kotlin/
+
+# Built release files (AAB/APK) — upload these to Play, don't commit them
+/app/release/
+*.aab
+*.apk
+
+# Notes and docs (kept on this Mac only)
+*.md
