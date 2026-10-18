@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WishWait Privacy Policy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
+<style>
+  /* Layout: one calm reading column, an "at a glance" panel up top, then numbered policy sections. */
+  :root {
+    --bg: #f6faf8;
+    --surface: #ffffff;
+    --fg: #16201d;
+    --muted: #4a5a55;
+    --line: #d6e2de;
+    --accent: #006b5e;
+    --accent-soft: #dcefea;
+    --font-display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+    --font-body: "Atkinson Hyperlegible", "Segoe UI", system-ui, -apple-system, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0f1513; --surface: #151d1a; --fg: #dde6e2; --muted: #9db0aa;
+      --line: #2a3632; --accent: #7fd3c3; --accent-soft: #16302b; color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0f1513; --surface: #151d1a; --fg: #dde6e2; --muted: #9db0aa;
+    --line: #2a3632; --accent: #7fd3c3; --accent-soft: #16302b; color-scheme: dark;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-body);
+    font-size: 17px;
+    line-height: 1.65;
+  }
+  .page {
+    max-width: 44rem;
+    margin: 0 auto;
+    padding-inline: 20px;
+    padding-block: 48px 72px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+  header { display: flex; flex-direction: column; gap: 10px; }
+  .app {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-family: var(--font-display); font-weight: 700; font-size: 1rem;
+    color: var(--accent); letter-spacing: 0.01em;
+  }
+  .mark {
+    width: 32px; height: 32px; border-radius: 10px;
+    background: var(--accent-soft); display: grid; place-items: center;
+  }
+  .mark svg { width: 20px; height: 20px; }
+  h1 {
+    font-family: var(--font-display); font-weight: 700;
+    font-size: clamp(2rem, 6vw, 2.75rem); line-height: 1.1;
+    margin: 0; text-wrap: balance;
+  }
+  .meta { color: var(--muted); font-size: 0.95rem; margin: 0; }
+  .lede { margin: 0; font-size: 1.1rem; max-width: 62ch; }
+
+  .glance {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 22px 22px 24px;
+    display: flex; flex-direction: column; gap: 16px;
+  }
+  .glance h2 {
+    font-family: var(--font-display); font-size: 0.8rem; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin: 0;
+  }
+  .facts {
+    list-style: none; margin: 0; padding: 0;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 14px 24px;
+  }
+  .facts li { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+  .facts strong { font-weight: 700; }
+  .facts span { color: var(--muted); font-size: 0.95rem; }
+
+  main { display: flex; flex-direction: column; gap: 32px; }
+  section { display: flex; flex-direction: column; gap: 10px; }
+  h2.sec {
+    font-family: var(--font-display); font-weight: 600; font-size: 1.3rem;
+    line-height: 1.25; margin: 0; text-wrap: balance;
+    display: flex; gap: 12px; align-items: baseline;
+  }
+  h2.sec .n {
+    font-variant-numeric: tabular-nums; color: var(--accent);
+    font-size: 0.95rem; min-width: 1.6em;
+  }
+  section p, section ul { margin: 0; max-width: 65ch; }
+  section ul { padding-left: 1.2em; display: flex; flex-direction: column; gap: 6px; }
+  .note {
+    border-top: 1px solid var(--line); padding-top: 24px;
+    color: var(--muted); font-size: 0.95rem; margin: 0;
+  }
+  a { color: var(--accent); text-underline-offset: 3px; }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 3px; }
+</style>
+<style>body{margin:0}</style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <div class="app">
+      <span class="mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="13" r="8" fill="none"></circle>
+          <path d="M12 9v4l2.5 2.5" fill="none"></path>
+          <path d="M9 2h6" fill="none"></path>
+        </svg>
+      </span>
+      WishWait
+    </div>
+    <h1>Privacy policy</h1>
+    <p class="meta">Effective October 9, 2026 · Applies to the WishWait Android app</p>
+    <p class="lede">WishWait helps you pause before buying. It works without an account, without AI and without ads, and it keeps what you enter on your phone. This page explains exactly what that means.</p>
+  </header>
+
+  <aside class="glance" aria-labelledby="glance-title">
+    <h2 id="glance-title">At a glance</h2>
+    <ul class="facts">
+      <li><strong>No account</strong><span>You never sign up or log in.</span></li>
+      <li><strong>Nothing collected</strong><span>The app sends none of your data to the developer.</span></li>
+      <li><strong>Stored on your phone</strong><span>Plus your own Google Drive, only if you turn on backup.</span></li>
+      <li><strong>No ads, no tracking</strong><span>No analytics or advertising tools are in the app.</span></li>
+    </ul>
+  </aside>
+
+  <main>
+    <section aria-labelledby="s1">
+      <h2 class="sec" id="s1"><span class="n">1</span>What the app stores</h2>
+      <p>To work, WishWait saves the information you type in, only in the app's private storage on your phone:</p>
+      <ul>
+        <li>Your wishes: name, price, category, need or want, reasons, mood, notes, check-ins, store link, and what you decided.</li>
+        <li>Your money settings: monthly income, work hours, savings pace, currency, paydays and strictness.</li>
+        <li>Your savings goal and the amounts you added to it.</li>
+        <li>App settings, such as reminders and the link-reading switch.</li>
+        <li>How many thank-you tips you have sent, for a small badge in Wins.</li>
+      </ul>
+      <p>The developer has no server and cannot see, receive or sell any of it.</p>
+    </section>
+
+    <section aria-labelledby="s2">
+      <h2 class="sec" id="s2"><span class="n">2</span>When the app uses the internet</h2>
+      <p>In three cases only. When Google Drive backup is on, to save your backup to your own Drive (see section 3). When you open "Support Ollie", Google Play loads the tip prices and handles any tip you choose to send (see section 5). And when you share or paste a product link and the setting "Fill in details from shared links" is on. WishWait then opens that public page on your phone, the same way a browser would, to read the product's name and price.</p>
+      <p>The store's website receives a normal page visit from your phone, including your IP address and basic device information, under that store's own privacy policy. WishWait sends nothing else, and clears any cookies the page sets. You can switch this off at any time in Settings.</p>
+    </section>
+
+    <section aria-labelledby="s3">
+      <h2 class="sec" id="s3"><span class="n">3</span>Backups</h2>
+      <ul>
+        <li><strong>Google Drive backup (optional).</strong> If you choose "Sign in with Google" in Settings, WishWait saves its backup file in a hidden app folder in your own Google Drive and updates it after you make changes. WishWait asks only for access to that folder (the <code>drive.appdata</code> permission), so it cannot see any of your other Drive files. The file is stored by Google under Google's privacy policy; it never passes through a WishWait server, and the developer cannot open it. You can turn backup off at any time and choose to delete the file, or remove WishWait's access in your Google Account settings.</li>
+        <li><strong>Backup files you make.</strong> "Export backup" saves a file wherever you choose, such as your Downloads folder or Google Drive. Keep it somewhere safe: it contains your wishes and income.</li>
+        <li><strong>Android backup.</strong> If Android backup is turned on for your phone, Android may include WishWait's data in your own Google account backup so it can come back on a new phone. This is handled by Android and your Google account; the developer never sees it. You can turn it off in your phone's settings.</li>
+      </ul>
+    </section>
+
+    <section aria-labelledby="s3b">
+      <h2 class="sec" id="s3b"><span class="n">3a</span>Google user data</h2>
+      <p>WishWait uses Google sign-in only to save and restore your own backup in your Google Drive. It reads your Google account email only to show which account backup uses. This information stays on your phone and in your Drive, and is never sold, shared or used for ads.</p>
+      <p>WishWait's use and transfer of information received from Google APIs adheres to the <a href="https://developers.google.com/terms/api-services-user-data-policy" rel="noopener">Google API Services User Data Policy</a>, including the Limited Use requirements.</p>
+    </section>
+
+    <section aria-labelledby="s4">
+      <h2 class="sec" id="s4"><span class="n">4</span>Notifications</h2>
+      <p>Reminders are scheduled and shown by your phone itself, only between 9 AM and 9 PM, and only if you allow notifications. Nothing is sent through outside servers.</p>
+    </section>
+
+    <section aria-labelledby="s5">
+      <h2 class="sec" id="s5"><span class="n">5</span>Optional tips</h2>
+      <p>You can send Ollie an optional thank-you tip. Tips unlock nothing, and the app is complete without them.</p>
+      <p>If you send one, Google Play handles the whole payment under Google's own terms and privacy policy. Google shares order details with the developer as described in its policies, such as the order number, date, item and amount. The developer never receives your card or other payment details.</p>
+    </section>
+
+    <section aria-labelledby="s6">
+      <h2 class="sec" id="s6"><span class="n">6</span>Permissions</h2>
+      <ul>
+        <li><strong>Notifications</strong>: to remind you about countdowns, sale days and payments.</li>
+        <li><strong>Run at startup</strong>: to put reminders back after your phone restarts.</li>
+        <li><strong>Internet</strong>: for reading shared product links, and for Google Play when you choose to send a tip.</li>
+        <li><strong>Google Play billing</strong>: only to show and process optional tips.</li>
+      </ul>
+    </section>
+
+    <section aria-labelledby="s7">
+      <h2 class="sec" id="s7"><span class="n">7</span>Deleting your data</h2>
+      <p>Use Settings → "Erase all data" to delete everything in the app, or uninstall WishWait. Because the developer holds no copy of your app data, there is nothing else to request or delete. Records of tips are kept by Google Play. A backup in your Google Drive stays there until you delete it from Settings (turn off Drive backup and tick "Also delete the backup") or from your Google Account. Backup files you exported stay wherever you saved them until you delete them.</p>
+    </section>
+
+    <section aria-labelledby="s8">
+      <h2 class="sec" id="s8"><span class="n">8</span>Children</h2>
+      <p>WishWait is a general budgeting tool and is not directed at children. It does not knowingly collect information from anyone, including children.</p>
+    </section>
+
+    <section aria-labelledby="s9">
+      <h2 class="sec" id="s9"><span class="n">9</span>Changes to this policy</h2>
+      <p>If WishWait ever changes how it handles data, this page will be updated with a new effective date before the change reaches the app.</p>
+    </section>
+
+    <section aria-labelledby="s10">
+      <h2 class="sec" id="s10"><span class="n">10</span>Contact</h2>
+      <p>For questions about this policy, contact the developer through the contact details on WishWait's Google Play listing.</p>
+    </section>
+  </main>
+
+  <p class="note">The in-app Terms and conditions (Settings → About) describe the same practices.</p>
+</div>
+</body>
+</html>

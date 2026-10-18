@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/widget_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/widget_background"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:importantForAccessibility="no"
+            android:text="🦉"
+            android:textSize="28sp" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/widget_kept"
+                android:textColor="@color/widget_subtext"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/widget_kept_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:text="@string/widget_kept_placeholder"
+                android:textColor="@color/widget_text"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/widget_next"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:text="@string/widget_empty"
+        android:textColor="@color/widget_text"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/widget_more"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/widget_subtext"
+        android:textSize="12sp"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/widget_sale"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:maxLines="1"
+        android:textColor="@color/widget_accent"
+        android:textSize="12sp"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/widget_add"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/widget_button"
+        android:gravity="center"
+        android:minHeight="48dp"
+        android:paddingHorizontal="16dp"
+        android:text="@string/widget_add"
+        android:textColor="@color/widget_on_accent"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+</LinearLayout>

@@ -1,0 +1,768 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    All user-facing text. To add a language (e.g. Filipino), copy this file to
+    res/values-fil/strings.xml and translate the values. Keep the %1$s placeholders.
+-->
+<resources>
+    <string name="app_name">WishWait</string>
+    <string name="share_target_label">Ask WishWait first</string>
+
+    <!-- ===== Common ===== -->
+    <string name="friend_name">Ollie</string>
+    <string name="friend_says">%1$s says</string>
+    <string name="action_back">Back</string>
+    <string name="action_close">Close</string>
+    <string name="action_cancel">Cancel</string>
+    <string name="action_save">Save</string>
+    <string name="action_next">Next</string>
+    <string name="action_delete">Delete</string>
+    <string name="action_undo">Undo</string>
+    <string name="action_edit">Edit</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_yay">Yay!</string>
+    <string name="cd_progress">%1$d percent done</string>
+
+    <plurals name="days">
+        <item quantity="one">%d day</item>
+        <item quantity="other">%d days</item>
+    </plurals>
+    <plurals name="months_count">
+        <item quantity="one">%d month</item>
+        <item quantity="other">%d months</item>
+    </plurals>
+    <string name="unit_min">%1$s min</string>
+    <string name="unit_hours">%1$s h</string>
+    <string name="unit_months">%1$s months</string>
+    <string name="unit_years">%1$s years</string>
+    <string name="unit_days_text">%1$s days</string>
+    <string name="income_share_label_multiple">your monthly income</string>
+    <string name="income_share_label_fraction">of your monthly income</string>
+    <string name="countdown_days_left">%1$dd %2$dh left</string>
+    <string name="countdown_hours_left">%1$dh %2$dm left</string>
+    <string name="countdown_minutes_left">%1$dm %2$ds left</string>
+    <string name="unit_days_short">days</string>
+    <string name="unit_hours_short">hrs</string>
+    <string name="no_wait">No wait</string>
+
+    <!-- ===== Impact meter ===== -->
+    <string name="meter_day">1 day</string>
+    <string name="meter_week">1 week</string>
+    <string name="meter_month">1 month</string>
+    <string name="meter_3months">3 months</string>
+    <string name="meter_year">1 year</string>
+    <string name="meter_of_pay">of your pay</string>
+    <string name="cd_impact">Costs %1$s %2$s</string>
+
+    <!-- ===== Navigation ===== -->
+    <string name="tab_wishes">Wishes</string>
+    <string name="tab_calculator">Calculator</string>
+    <string name="tab_wins">Wins</string>
+
+    <!-- ===== Categories ===== -->
+    <string name="category_gadgets">Gadgets</string>
+    <string name="category_fashion">Fashion</string>
+    <string name="category_home">Home</string>
+    <string name="category_food">Food</string>
+    <string name="category_fun">Fun</string>
+    <string name="category_travel">Travel</string>
+    <string name="category_beauty">Beauty</string>
+    <string name="category_vehicle">Vehicle</string>
+    <string name="category_other">Other</string>
+
+    <!-- ===== Reasons ===== -->
+    <string name="reason_replace_broken">Replacing something broken</string>
+    <string name="reason_needed_for_work">Need it for work or school</string>
+    <string name="reason_upgrade">Upgrade what I have</string>
+    <string name="reason_saw_an_ad">Saw it online or in an ad</string>
+    <string name="reason_on_sale">It\'s on sale</string>
+    <string name="reason_reward">Reward for myself</string>
+    <string name="reason_everyone_has_it">Everyone has one</string>
+    <string name="reason_just_want_it">I just want it</string>
+
+    <!-- ===== Moods ===== -->
+    <string name="mood_calm">Calm</string>
+    <string name="mood_happy">Happy</string>
+    <string name="mood_excited">Hyped</string>
+    <string name="mood_bored">Bored</string>
+    <string name="mood_stressed">Stressed</string>
+    <string name="mood_sad">Down</string>
+    <string name="mood_tired">Tired</string>
+    <string name="mood_hungry">Hungry</string>
+
+    <!-- ===== Strictness ===== -->
+    <string name="strictness_chill">Chill</string>
+    <string name="strictness_balanced">Balanced</string>
+    <string name="strictness_strict">Strict</string>
+    <string name="strictness_chill_desc" formatted="false">Shorter cooldowns, and wants can take up to 40% of each cutoff\'s pay.</string>
+    <string name="strictness_balanced_desc" formatted="false">The sweet spot: normal cooldowns, wants stay under 30% of each cutoff\'s pay.</string>
+    <string name="strictness_strict_desc" formatted="false">Longer cooldowns, and wants stay under 20% of each cutoff\'s pay.</string>
+
+    <!-- ===== Achievements ===== -->
+    <string name="ach_first_pause">First Pause</string>
+    <string name="ach_first_pause_desc">Started your first cooldown</string>
+    <string name="ach_let_it_go">Let It Go</string>
+    <string name="ach_let_it_go_desc">Released a wish you didn\'t really need</string>
+    <string name="ach_mindful_buyer">Mindful Buyer</string>
+    <string name="ach_mindful_buyer_desc">Bought something after waiting it out</string>
+    <string name="ach_patience_pro">Patience Pro</string>
+    <string name="ach_patience_pro_desc">Finished a 30-day cooldown</string>
+    <string name="ach_feelings_fade">Feelings Fade</string>
+    <string name="ach_feelings_fade_desc">Watched your desire drop by 2+ levels</string>
+    <string name="ach_no_regrets">No Regrets</string>
+    <string name="ach_no_regrets_desc">Told us you\'re glad about a purchase</string>
+    <string name="ach_free_spirit">Free Spirit</string>
+    <string name="ach_free_spirit_desc">Let go of 5 wishes</string>
+    <string name="ach_month_of_freedom">Month of Freedom</string>
+    <string name="ach_month_of_freedom_desc">Kept a full month\'s income by letting go</string>
+    <string name="ach_paid_for_itself">Paid For Itself</string>
+    <string name="ach_paid_for_itself_desc">Used a purchase enough to make it worth it</string>
+    <string name="ach_debt_free">Debt Free</string>
+    <string name="ach_debt_free_desc">Finished paying off an installment</string>
+    <string name="ach_goal_getter">Goal Getter</string>
+    <string name="ach_goal_getter_desc">Reached a savings goal</string>
+
+    <!-- ===== Desire ===== -->
+    <string name="desire_1">Meh</string>
+    <string name="desire_2">It\'s okay</string>
+    <string name="desire_3">I like it</string>
+    <string name="desire_4">Really want</string>
+    <string name="desire_5">Must have!</string>
+    <string name="desire_tap_hint">Tap how you feel</string>
+    <string name="cd_desire_option">%1$s, level %2$d of 5</string>
+    <string name="cd_desire_chart">Desire over time: %1$s</string>
+    <string name="desire_insight_start">Check in daily. Watching your feelings change is the secret sauce.</string>
+    <string name="desire_insight_drop">Your desire dropped from %1$s to %2$s. The hype is fading — that\'s useful information.</string>
+    <string name="desire_insight_rise">You want it even more than day one. That\'s a sign it might be a real want.</string>
+    <string name="desire_insight_steady">Your desire is holding steady. Keep checking in.</string>
+
+    <!-- ===== Ollie: verdict ===== -->
+    <string name="headline_treat">Small treat. You\'ve got this.</string>
+    <string name="headline_small">Not bad — but let\'s sleep on it.</string>
+    <string name="headline_medium">Hmm, that\'s a real chunk of your pay.</string>
+    <string name="headline_large">Whoa, that\'s a big bite of your paycheck.</string>
+    <string name="headline_big">That\'s almost a whole paycheck!</string>
+    <string name="headline_huge">Hold up. That\'s months of work.</string>
+    <string name="headline_massive">Okay friend, deep breath.</string>
+    <string name="verdict_this">This</string>
+    <string name="msg_treat">%1$s is %2$s of your monthly income — about %3$s of work. Small joys matter. Just make sure it\'s a joy, not a reflex.</string>
+    <string name="msg_small">%1$s costs %3$s of your work time. Not huge, but small buys add up fast. If you still want it after a short wait, enjoy it guilt-free.</string>
+    <string name="msg_medium">%1$s is %2$s of what you earn in a month. That\'s %3$s of your life at work. A week of waiting will tell you if this is love or just a crush.</string>
+    <string name="msg_large">%1$s eats %2$s of your monthly income — %3$s of work. Let\'s give it a couple of weeks. Real wants survive; impulses fade.</string>
+    <string name="msg_big">%1$s is %2$s of a month\'s pay. You\'d trade %3$s of your life for it. Worth it? Maybe! Let\'s find out by waiting.</string>
+    <string name="msg_huge">%1$s costs %2$s your monthly income. That\'s %3$s of work — real weeks of your life. If you still want it after the cooldown, it\'s a real want, not a mood.</string>
+    <string name="msg_moods">You said you\'re feeling %1$s. Those feelings love to shop, so I added %2$s to the wait.</string>
+    <string name="msg_sale">About the sale: it\'s designed to rush you. Would you still want it at full price? There\'s always another sale.</string>
+    <string name="msg_social">Comparing ourselves to others is the most expensive habit there is. Is this for you, or for them?</string>
+    <string name="msg_history">Heads up: you regretted %1$d of your last %2$d rated %3$s buys, so I added %4$s. I\'m learning from you.</string>
+    <string name="msg_need">Since it sounds like a real need, I shortened the wait. Use it to compare prices or look for a good second-hand one.</string>
+    <string name="msg_months_to_save">At your saving pace, this is %1$s of savings. Paying cash beats paying interest.</string>
+    <string name="afford_easy">Comfortable</string>
+    <string name="afford_ok">Doable</string>
+    <string name="afford_stretch">A stretch</string>
+    <string name="afford_not_now">Not yet</string>
+    <string name="tip_mute_store">Unfollow or mute the store for now — out of sight, out of mind.</string>
+    <string name="tip_three_things">Write down 3 things you\'d do with this money instead.</string>
+    <string name="tip_second_hand">Check for a refurbished, second-hand, or older model.</string>
+    <string name="tip_already_own">Look around: does something you already own do the job?</string>
+    <string name="tip_save_now">Start saving the amount now. If you let it go, the money stays yours.</string>
+    <string name="tip_delete_cards">Delete saved cards from shopping apps so buying takes a little effort.</string>
+    <string name="reflect_1">Will this still matter to you 10 months from now?</string>
+    <string name="reflect_2">If it were full price, would you still want it?</string>
+    <string name="reflect_3">What would you do with the same money instead?</string>
+    <string name="reflect_4">Is there something you own that already does the job?</string>
+    <string name="reflect_5">How will you feel paying for it — excited or uneasy?</string>
+    <string name="reflect_6">Would you buy it if nobody could ever see it?</string>
+    <string name="reflect_7">Where will it live? Do you have space and time for it?</string>
+    <string name="reflect_8">Is this solving a problem, or a feeling?</string>
+
+    <!-- ===== Onboarding ===== -->
+    <string name="onb_lets_go">Let\'s go</string>
+    <string name="onb_hi">Hi, I\'m %1$s.</string>
+    <string name="onb_pitch">Your honest shopping buddy. Before you tap “Buy”, tell me about it. I\'ll show you what it really costs you and help you decide — no shame, no judgment.</string>
+    <string name="onb_privacy_line">No account · No AI · Your data stays on your phone</string>
+    <string name="onb_how_title">How it works</string>
+    <string name="onb_step1_title">See the real cost</string>
+    <string name="onb_step1_body">Not just the price — how many hours of work and how much of your paycheck it takes.</string>
+    <string name="onb_step2_title">Cool down</string>
+    <string name="onb_step2_body">Wait a few days (or 30 for big stuff). I\'ll remind you. Hype fades; real wants stay.</string>
+    <string name="onb_step3_title">Check in</string>
+    <string name="onb_step3_body">Rate how badly you still want it. Watch the feeling change over time.</string>
+    <string name="onb_step4_title">Win either way</string>
+    <string name="onb_step4_body">Buy it mindfully, or let it go and watch the money you kept grow.</string>
+    <string name="onb_money_title">Your money, privately</string>
+    <string name="onb_money_body">I use this to translate prices into paychecks and work hours. It never leaves your phone.</string>
+    <string name="field_income">Monthly take-home pay</string>
+    <string name="field_income_error">Enter your monthly income to continue</string>
+    <string name="field_income_hint">After tax — what actually lands in your account</string>
+    <string name="field_hours">Work hours per month</string>
+    <string name="field_hours_suffix">hours</string>
+    <string name="field_hours_hint">Full-time is about 160</string>
+    <string name="field_savings_optional">How much can you save per month? (optional)</string>
+    <string name="field_savings_hint">Used for “save up first” plans</string>
+    <string name="onb_use_20" formatted="false">Use 20% of income</string>
+    <string name="onb_style_title">How strict should I be?</string>
+    <string name="onb_style_body">This sets how long your cooldowns are and how much of each cutoff can go to wants. You can change it anytime.</string>
+    <string name="onb_style_example">Example: a phone that costs 5× your monthly pay gets a 30-day cooldown on Balanced.</string>
+
+    <!-- ===== Home ===== -->
+    <string name="home_add">I want something</string>
+    <string name="home_kept">Kept in your pocket</string>
+    <string name="home_hours_kept">That\'s %1$s of work you didn\'t trade for stuff.</string>
+    <string name="home_pill_on_hold">⏳ %1$d on hold</string>
+    <string name="home_pill_let_go">🕊️ %1$d let go</string>
+    <string name="greet_empty">Hey! Thinking of buying something? Run it by me first.</string>
+    <string name="greet_one">1 wish is cooling down. Proud of you for waiting.</string>
+    <string name="greet_many">%1$d wishes are cooling down. Patience is a superpower.</string>
+    <string name="greet_clear">All clear. Your future self says thanks.</string>
+    <string name="home_section_ready">Time to decide ⏰</string>
+    <string name="home_section_waiting">Cooling down</string>
+    <string name="home_section_decided">Decided</string>
+    <string name="home_show_less">Show less</string>
+    <string name="home_see_all">See all (%1$d)</string>
+    <string name="home_empty_title">Nothing on your wishlist</string>
+    <string name="home_empty_body">Next time you\'re about to tap “Buy”, add it here first. I\'ll tell you what it really costs and help you decide.</string>
+    <string name="home_empty_cta">Add my first wish</string>
+    <string name="card_ready_label">Cooldown complete!</string>
+    <string name="card_ready_body">%1$s · You waited %2$s. Still want it?</string>
+    <string name="card_decide">Decide</string>
+    <string name="row_let_go">Let go · kept %1$s</string>
+    <string name="row_bought_early">Bought early</string>
+    <string name="row_bought_mindfully">Bought mindfully</string>
+    <string name="row_with_date">%1$s · %2$s</string>
+    <string name="cd_wish_waiting">%1$s, %2$s, %3$s</string>
+
+    <!-- ===== Payday & sale days ===== -->
+    <string name="msg_sale_day">Today is %1$s — sale apps are built to make you buy fast. I added %2$s. Good deals come back; there\'s a sale almost every month.</string>
+    <string name="msg_payday">It\'s right after payday, when money feels plentiful. I added %1$s — bills and savings first.</string>
+    <string name="home_banner_sale_today">🏷️ It\'s %1$s! Expect \"limited time\" pressure today. Add it here before you check out — I\'ll be extra careful.</string>
+    <string name="home_banner_sale_tomorrow">🏷️ %1$s is tomorrow. Decide what you really need today, not when the countdown starts.</string>
+    <string name="home_banner_payday">💸 Payday! Bills and savings first. New wants can wait a few days; wishes you\'ve already waited on are fair game.</string>
+    <string name="home_since_payday">%1$s kept since payday</string>
+    <string name="payday_title">When do you get paid?</string>
+    <string name="payday_hint">Ollie is a bit stricter right after payday, when money feels plentiful.</string>
+    <string name="payday_15_30">15th &amp; 30th</string>
+    <string name="payday_end">End of month</string>
+    <string name="payday_15">15th</string>
+    <string name="payday_later">Set later</string>
+    <string name="payday_none">Not set</string>
+    <string name="payday_other">Other days</string>
+    <string name="payday_day_field">Payday (day of month)</string>
+    <string name="payday_second_field">Second payday (optional)</string>
+    <string name="payday_days">Day %1$s</string>
+    <string name="set_payday">Payday</string>
+
+    <!-- ===== Savings goal ===== -->
+    <string name="goal_empty_title">What are you saving for?</string>
+    <string name="goal_empty_body">Set one goal. Every wish you let go can move you closer.</string>
+    <string name="goal_saving_for">Saving for</string>
+    <string name="goal_reached_line">🎉 Goal reached! You did it.</string>
+    <string name="goal_progress_line">%1$s of %2$s</string>
+    <string name="goal_new">New goal</string>
+    <string name="goal_add_money">Add money</string>
+    <string name="goal_dialog_new">Set your goal</string>
+    <string name="goal_dialog_edit">Edit goal</string>
+    <string name="goal_field_name">What\'s it for?</string>
+    <string name="goal_field_name_hint">e.g. Japan trip, emergency fund</string>
+    <string name="goal_field_amount">Goal amount</string>
+    <string name="goal_keeps_saved">The %1$s you\'ve saved so far stays.</string>
+    <string name="goal_remove">Remove</string>
+    <string name="goal_add_to">Add to %1$s</string>
+    <string name="goal_add_amount">Amount</string>
+    <string name="goal_add_note">Move the money in your bank or e-wallet app — WishWait just keeps score.</string>
+    <string name="goal_reached_title">Goal reached! 🎉</string>
+    <string name="goal_reached_body">You saved for %1$s. That\'s what patience buys.</string>
+    <string name="goal_letgo_add">Add to %1$s %2$s</string>
+    <string name="goal_letgo_skip">Just keep it</string>
+    <string name="verdict_goal_share">Or: %1$s is %2$s of your %3$s %4$s goal.</string>
+    <string name="verdict_goal_finish">Or: this money would finish your %1$s %2$s goal! 🎯</string>
+    <string name="msg_added_to_goal">Added %1$s to %2$s</string>
+
+    <!-- ===== Add wish ===== -->
+    <string name="add_title_form">New wish</string>
+    <string name="add_title_verdict">%1$s\'s take</string>
+    <string name="add_edit_wish">Edit wish</string>
+    <string name="add_question">What\'s catching your eye?</string>
+    <string name="field_what">What is it?</string>
+    <string name="field_what_placeholder">e.g. New phone, sneakers, concert tickets</string>
+    <string name="field_what_error">Give it a name</string>
+    <string name="field_price">Price</string>
+    <string name="field_price_error">Enter the price</string>
+    <string name="price_work_hint">≈ %1$s of your work</string>
+    <string name="add_category">Category</string>
+    <string name="add_why_sub">Pick all that apply — be honest, it\'s just us</string>
+    <string name="add_mood">How are you feeling right now?</string>
+    <string name="add_mood_sub">Moods drive more purchases than we think</string>
+    <string name="add_desire">How badly do you want it?</string>
+    <string name="field_note">Note to future me (optional)</string>
+    <string name="field_note_placeholder">Why it matters, where you saw it, a link…</string>
+    <string name="add_ask">Ask %1$s 🦉</string>
+    <string name="add_income_tip">Tip: add your income in Settings so I can translate prices into paychecks.</string>
+    <string name="verdict_stat_hours">of work</string>
+    <string name="verdict_stat_days">work days</string>
+    <string name="verdict_stat_saving">of saving</string>
+    <string name="verdict_stat_afford">to afford</string>
+    <string name="verdict_cooldown">Cooldown</string>
+    <string name="cd_fewer_days">Fewer days</string>
+    <string name="cd_more_days">More days</string>
+    <string name="verdict_no_wait_sub">Tiny, calm, and needed? Go ahead and enjoy it.</string>
+    <string name="verdict_shorter_sub">I suggested %1$s — but you\'re the boss. Decide on %2$s.</string>
+    <string name="verdict_decide_on">Decide on %1$s. I\'ll remind you.</string>
+    <string name="verdict_go_for_it">Go for it — enjoy! 🎉</string>
+    <string name="verdict_start">Start my %1$s cooldown</string>
+    <string name="verdict_plan">Plan how I\'d pay for it</string>
+    <string name="verdict_let_go">🕊️ Let it go</string>
+    <string name="verdict_buy_anyway">Buy now anyway</string>
+    <string name="verdict_tips_title">Ways to beat the urge</string>
+    <string name="kept_title">You kept %1$s!</string>
+    <string name="kept_body_add">Letting go is a win. That money is still yours — added to your “kept in your pocket” total.</string>
+    <string name="kept_ok">Feels good</string>
+    <string name="skip_title">Skip the cooldown?</string>
+    <string name="skip_body">I suggested waiting %1$s. You can still buy now — I\'ll log it as an early buy so you can see your patterns later. No judgment.</string>
+    <string name="skip_wait">Okay, I\'ll wait</string>
+    <string name="skip_buy">Buy it now</string>
+
+    <!-- ===== Share to WishWait ===== -->
+    <string name="share_banner_title">Shared from %1$s 🛍️</string>
+    <string name="share_banner_title_generic">Shared from another app 🛍️</string>
+    <string name="share_banner_body">I filled in what I could. Check the name and price — then let\'s see what it really costs.</string>
+    <string name="share_banner_no_price">I couldn\'t find the price. Type it in from the store page.</string>
+    <string name="paste_link">Paste product link</string>
+    <string name="paste_link_hint">Saw it on Shopee? Tap Copy Link there, then paste it here. Sharing to WishWait works too.</string>
+    <string name="paste_none">No product link found in what you copied. Tap Copy Link in the shop first.</string>
+    <string name="share_looking_up">Reading the details from %1$s…</string>
+    <string name="share_looking_up_generic">Reading the details from the link…</string>
+    <string name="share_found_online">Got the name and price from the %1$s page — double-check them.</string>
+    <string name="share_found_online_generic">Got the details from the product page — double-check them.</string>
+    <string name="share_banner_no_name">I only got a link, so I couldn\'t read what it is. Type the product name and price.</string>
+    <string name="share_banner_no_name_store">%1$s didn\'t let me read the product name. Type the name and price — your cursor\'s ready.</string>
+    <string name="share_banner_no_price_store">I couldn\'t read the price from %1$s — just type it in. I\'ve put your cursor there.</string>
+    <string name="share_link_hidden">🔒 I\'ll keep the store link hidden until your cooldown ends.</string>
+    <string name="link_locked_title">🔒 Store link locked</string>
+    <string name="link_locked_body">Out of sight, out of mind. The %1$s link unlocks on %2$s.</string>
+    <string name="link_store_generic">store</string>
+    <string name="link_open">Open in %1$s</string>
+    <string name="link_open_generic">Open store link</string>
+
+    <!-- ===== Detail ===== -->
+    <string name="detail_gone">This wish is gone. 🕊️</string>
+    <string name="detail_impact_line">%1$s %2$s · %3$s of work</string>
+    <string name="detail_cooling">Cooling down</string>
+    <string name="detail_day_left">day left</string>
+    <string name="detail_days_left">days left</string>
+    <string name="detail_decide_on">Decide on %1$s · day %2$d of %3$d</string>
+    <string name="detail_plus7">+7 days</string>
+    <string name="detail_cant_wait">I can\'t wait — buy now</string>
+    <string name="decide_title">⏰ Time to decide</string>
+    <string name="decide_waited">You waited %1$s. Nice!</string>
+    <string name="decide_advice_no_checkins">You made it through the whole cooldown! Do you still want it as much as on day one?</string>
+    <string name="decide_advice_drop">Your desire dropped a lot while waiting. That\'s usually a sign to let it go.</string>
+    <string name="decide_advice_rise">You want it even more than when you started. Sounds like a real want — buy it with a clear head.</string>
+    <string name="decide_advice_steady">Your feelings held steady. If it fits your budget, it\'s a thoughtful buy.</string>
+    <string name="decide_buy">I still want it — buy it</string>
+    <string name="decide_let_go">🕊️ Let it go &amp; keep the money</string>
+    <string name="decide_more_time">Not sure yet — give me 7 more days</string>
+    <string name="checkin_title">Want-o-meter</string>
+    <string name="checkin_done_today">Checked in today. You can update it if your feelings changed.</string>
+    <string name="checkin_prompt">How much do you want it today?</string>
+    <string name="checkin_history_title">How your feelings changed</string>
+    <string name="reflect_title">Today\'s question</string>
+    <string name="past_you_title">What past-you said</string>
+    <string name="past_you_feeling">Feeling %1$s %2$s</string>
+    <string name="past_you_added">Added %1$s</string>
+    <string name="afford_title">If you do buy it</string>
+    <string name="afford_savings">Saving %1$s a month, you could pay cash in %2$s. Start setting it aside now — if you let it go, you keep it all.</string>
+    <string name="afford_no_savings">Paying cash beats paying interest. Use the calculator to compare saving up, installments, and cost per use.</string>
+    <string name="afford_per_day">per day over 2 years</string>
+    <string name="afford_invested" formatted="false">if saved at 6% for 5 yrs</string>
+    <string name="afford_open_calc">Open the calculator</string>
+    <string name="bought_early">Bought early</string>
+    <string name="bought_mindfully">Bought mindfully</string>
+    <string name="bought_on">On %1$s</string>
+    <string name="glad_question">Glad you bought it?</string>
+    <string name="glad_love">💚 Love it</string>
+    <string name="glad_regret">😕 Regret it</string>
+    <string name="regret_noted">Thanks for being honest. I\'ll remember: future %1$s wishes may get a longer cooldown.</string>
+    <string name="love_noted">Love that. Good buys teach me too 💚</string>
+    <string name="regret_check_on">Not sure yet? I\'ll check in on %1$s to ask how it\'s going.</string>
+    <string name="regret_check_now">It\'s been a while — how do you feel about it now?</string>
+    <string name="let_go_title">You let it go</string>
+    <string name="let_go_kept">and kept %1$s</string>
+    <string name="let_go_hours">That\'s %1$s of your work still yours.</string>
+    <string name="early_title">Only %1$s to go!</string>
+    <string name="early_body_hours">You\'re so close. Hang in there a few more hours?</string>
+    <string name="early_body">You\'ve come this far. Buying now will be logged as an early buy. Want to hold on a little longer?</string>
+    <string name="early_keep_waiting">Keep waiting</string>
+    <string name="early_buy">Buy now</string>
+    <string name="delete_title">Delete this wish?</string>
+    <string name="delete_body">It will be removed from your history and stats. This can\'t be undone.</string>
+    <string name="celebrate_kept_body">That\'s real money staying in your life. Proud of you.</string>
+    <string name="celebrate_mindful_title">Enjoy it — you earned it!</string>
+    <string name="celebrate_mindful_body">You waited it out, so this is a real want. That\'s what mindful buying looks like.</string>
+    <string name="celebrate_worth_title">It paid for itself!</string>
+    <string name="celebrate_worth_body">Each use now costs %1$s. That\'s a purchase that earned its place.</string>
+    <string name="celebrate_debt_title">Paid off!</string>
+    <string name="celebrate_debt_body">No more payments for %1$s. It\'s 100%% yours now.</string>
+    <string name="msg_checkin_saved">Check-in saved. See you tomorrow!</string>
+    <string name="msg_extended">Added %1$s. Future you approves.</string>
+    <string name="msg_love_noted">Love that. Noted for next time 💚</string>
+    <string name="msg_regret_noted">Noted. Future %1$s wishes may get a longer cooldown.</string>
+    <string name="msg_plan_saved">Payment plan saved. I\'ll remind you on each due date.</string>
+    <string name="msg_payment_done">Payment %1$d of %2$d done 💪</string>
+    <string name="msg_wish_updated">Wish updated</string>
+    <string name="use_already_worth">Use #%1$d logged. It\'s already paid for itself — enjoy!</string>
+    <string name="use_first">First use logged! %1$d more to make it worth it.</string>
+    <string name="use_almost">Use #%1$d — almost there, just %2$d to go!</string>
+    <string name="use_halfway">Use #%1$d — halfway to worth it!</string>
+    <string name="use_logged">Use #%1$d logged. %2$d to go.</string>
+
+    <!-- Edit -->
+    <string name="edit_title">Edit wish</string>
+    <string name="edit_note_cooldown">Changing the price won\'t change the cooldown you already started.</string>
+
+    <!-- Worth-it tracker -->
+    <string name="worth_title">Worth-it tracker</string>
+    <string name="worth_goal">Goal</string>
+    <string name="worth_not_used">Not used yet</string>
+    <string name="worth_not_used_body">Every time you use it, tap the button. Watch the cost per use drop.</string>
+    <string name="worth_per_use">per use so far</string>
+    <string name="worth_uses_of">%1$d of %2$d uses</string>
+    <string name="worth_done">💯 Worth it!</string>
+    <string name="worth_to_go">%1$d to go</string>
+    <string name="worth_paid_for_itself">It\'s paid for itself — each use now costs %1$s, under your goal of %2$s.</string>
+    <string name="worth_goal_line">Goal: each use costs %1$s or less.</string>
+    <string name="worth_goal_line_default">Goal: each use costs %1$s or less (about 1 hour of your work).</string>
+    <string name="worth_interest">Includes %1$s of installment interest.</string>
+    <string name="worth_unused_month">🦉 You haven\'t used it in over a month. If it\'s just sitting there, selling it could get some money back.</string>
+    <string name="worth_used_it">I used it</string>
+    <string name="worth_last_used">Last used %1$s</string>
+    <string name="target_title">When is it worth it?</string>
+    <string name="target_body">Set the most you\'d happily pay for each use. A gym membership might be worth it at the price of a coffee per visit.</string>
+    <string name="target_field">Max cost per use</string>
+    <string name="target_hint_default">Leave empty for 1 hour of work (%1$s)</string>
+
+    <!-- Payments -->
+    <string name="pay_how_title">How did you pay?</string>
+    <string name="pay_how_body">Paid in full? Nothing to do here 🙌\nPaying in installments? I\'ll track the balance and remind you on each due date.</string>
+    <string name="pay_track">💳 Track installment payments</string>
+    <string name="pay_title">💳 Installment</string>
+    <string name="pay_paid_off">🎊 Paid off!</string>
+    <string name="pay_paid_off_body">All %1$d payments done — %2$s in total. It\'s fully yours.</string>
+    <string name="pay_progress">%1$d of %2$d paid</string>
+    <string name="pay_per_month">per month</string>
+    <string name="pay_left">left to pay</string>
+    <string name="pay_overdue">⚠️ Payment %1$d was due %2$s</string>
+    <string name="pay_next_due">Next payment due %1$s</string>
+    <string name="pay_mark">Mark payment %1$d paid</string>
+    <string name="pay_setup_title">Installment plan</string>
+    <string name="pay_months">Number of months</string>
+    <string name="pay_interest">Interest per year</string>
+    <string name="pay_interest_hint" formatted="false">Use 0 for a 0% installment</string>
+    <string name="pay_already">Payments already made</string>
+    <string name="pay_preview">%1$s a month · %2$s total</string>
+    <string name="pay_first_due">First payment is due one month after you bought it.</string>
+    <string name="pay_in_full">Paid in full</string>
+    <string name="cd_fewer">Fewer</string>
+    <string name="cd_more">More</string>
+
+    <!-- ===== Calculator ===== -->
+    <string name="calc_title">What-if calculator</string>
+    <string name="calc_price">How much does it cost?</string>
+    <string name="calc_empty">Type a price to see what it really costs you — and different ways you could pay for it.</string>
+    <string name="calc_hours_afford">%1$s of work · %2$s</string>
+    <string name="calc_mode_save">Save up</string>
+    <string name="calc_mode_installment">Installment</string>
+    <string name="calc_mode_per_use">Cost per use</string>
+    <string name="calc_mode_invest">Invest instead</string>
+    <string name="calc_disclaimer">Estimates only — for deciding, not for financial advice.</string>
+    <string name="calc_save_monthly">I can set aside per month</string>
+    <string name="calc_save_already">Already saved for it (optional)</string>
+    <string name="calc_save_empty">Enter a monthly amount to see when you could pay in cash.</string>
+    <string name="calc_save_now_big">You can pay cash now ✅</string>
+    <string name="calc_save_now_caption">Good news</string>
+    <string name="calc_save_now_detail">You\'ve already saved enough. Still, sleep on it!</string>
+    <string name="calc_save_by">Pay in full by about %1$s</string>
+    <string name="calc_save_detail">Set aside %1$s a month for %2$s. No interest, no debt — and if you change your mind, the money stays yours.</string>
+    <string name="calc_months">Number of months</string>
+    <string name="calc_interest_hint" formatted="false">0 for a true 0% plan. Credit cards are often 24–42% a year.</string>
+    <string name="calc_per_month_big">%1$s / month</string>
+    <string name="calc_for_months">for %1$s</string>
+    <string name="calc_total_paid">Total paid: %1$s</string>
+    <string name="calc_interest_part">" (%1$s in interest)"</string>
+    <string name="calc_share_income">\nThat\'s %1$s of your monthly income, every month.</string>
+    <string name="calc_uses_week">Times I\'d use it per week</string>
+    <string name="calc_years_use">Years I\'d keep using it</string>
+    <string name="calc_per_use_big">%1$s per use</string>
+    <string name="calc_across_uses">Across about %1$s uses</string>
+    <string name="calc_per_use_good">Used that often, it earns its keep. Still — would you really use it that much?</string>
+    <string name="calc_per_use_bad">Each use costs a good chunk. Be honest about how often you\'d really use it.</string>
+    <string name="calc_per_month_eff">per month, effectively</string>
+    <string name="calc_total_uses">total uses</string>
+    <string name="calc_return">Expected yearly return</string>
+    <string name="calc_return_hint" formatted="false">Savings accounts ~3–5%, long-term index funds historically ~6–8%</string>
+    <string name="calc_years">Years</string>
+    <string name="calc_invest_caption">If you saved it instead, in %1$d years</string>
+    <string name="calc_invest_detail">That\'s %1$s of growth on top of the price. Compound interest is the friend that pays you to wait.</string>
+
+    <!-- ===== Wins ===== -->
+    <string name="wins_title">Your wins</string>
+    <string name="wins_kept">Money you kept by letting go</string>
+    <string name="wins_line_none">Your first decision is coming. Patience pays — literally.</string>
+    <string name="wins_line">%1$d of %2$d decisions made with a clear head. Keep it up!</string>
+    <string name="wins_let_go">let go</string>
+    <string name="wins_mindful">mindful buys</string>
+    <string name="wins_early">early buys</string>
+    <string name="wins_hours">of work kept</string>
+    <string name="wins_desire">avg. desire change while waiting</string>
+    <string name="wins_loved">buys you love</string>
+    <string name="wins_regretted">buys you regret</string>
+    <string name="wins_badges">Badges · %1$d/%2$d</string>
+    <string name="wins_history">History</string>
+    <string name="wins_empty">🦉 Decisions you make show up here. Every wait counts — even the ones that end in “buy”.</string>
+    <string name="cd_badge_locked">%1$s, locked. %2$s</string>
+    <string name="cd_badge_unlocked">%1$s, unlocked. %2$s</string>
+
+    <!-- ===== Settings ===== -->
+    <string name="set_money">Your money</string>
+    <string name="set_savings">Monthly savings capacity</string>
+    <string name="set_currency">Currency</string>
+    <string name="set_strictness">Cooldown strictness</string>
+    <string name="set_strictness_note">%1$s Cooldown changes apply to wishes you add from now on.</string>
+    <string name="set_reminders">Cooldown reminders</string>
+    <string name="set_fetch_links">Fill in details from shared links</string>
+    <string name="set_fetch_links_desc">When a shared or pasted product is missing its name or price, WishWait opens that one link in a hidden browser to read them, then clears the shop\'s cookies. Nothing about you is sent. Turn off to stay 100% offline.</string>
+    <string name="set_reminders_desc">Check-ins, decision nudges, regret checks and payment due dates (9 AM–9 PM only)</string>
+    <string name="set_backup">Backup</string>
+    <string name="set_backup_desc">Or save a backup file yourself, to email or keep on your computer, and restore it on a new phone.</string>
+    <string name="set_export">Export backup</string>
+    <string name="set_import">Restore from backup</string>
+    <string name="set_privacy">Privacy</string>
+    <string name="set_privacy_body">🦉 WishWait has no account, no AI, no ads and no servers of its own. Everything you enter stays on this phone and in backups you control.</string>
+    <string name="set_erase">Erase all data</string>
+    <string name="erase_title">Erase everything?</string>
+    <string name="erase_body">All wishes, history, badges and settings will be deleted from this phone. This can\'t be undone. A backup in your Google Drive stays there, so you can restore it later.</string>
+    <string name="erase_confirm">Erase</string>
+    <string name="msg_saved">Saved</string>
+    <string name="msg_backup_saved">Backup saved ✅</string>
+    <string name="msg_backup_failed">Couldn\'t save the backup. Try another location.</string>
+    <string name="msg_backup_invalid">That file isn\'t a WishWait backup.</string>
+    <string name="msg_restored">Backup restored 🎉</string>
+    <string name="restore_title">Restore this backup?</string>
+    <string name="restore_body">Backup from %1$s with %2$d wishes. Everything currently on this phone will be replaced.</string>
+    <string name="restore_confirm">Restore</string>
+    <string name="currency_title">Change currency to %1$s?</string>
+    <string name="currency_body">Your income and wishes are in %1$s. Moving countries? Convert everything with today\'s rate. If the amounts were already in %2$s, just change the symbol.</string>
+    <string name="currency_rate">1 %1$s = ? %2$s</string>
+    <string name="currency_convert">Convert</string>
+    <string name="currency_relabel">Just change symbol</string>
+    <string name="msg_currency_converted">Converted to %1$s</string>
+
+    <!-- ===== Notifications ===== -->
+    <string name="channel_reminders_name">Cooldown reminders</string>
+    <string name="channel_reminders_desc">Check-ins while you wait, a nudge when it\'s time to decide, and payment due dates.</string>
+    <string name="notif_mid_title">Halfway there 🦉</string>
+    <string name="notif_mid_body">How badly do you still want %1$s? Tap to check in — feelings change more than we think.</string>
+    <string name="notif_end_title">⏰ Cooldown over: %1$s</string>
+    <string name="notif_end_body">You waited %1$s. Still want it? Buy it mindfully or let it go and keep the money.</string>
+    <string name="notif_regret_title">Still happy with %1$s? 💭</string>
+    <string name="notif_regret_body">It\'s been two weeks. %1$s Tap to tell me — it helps me give you better advice next time.</string>
+    <string name="notif_uses_none">You haven\'t logged any uses yet.</string>
+    <plurals name="notif_uses">
+        <item quantity="one">You\'ve used it once so far.</item>
+        <item quantity="other">You\'ve used it %d times so far.</item>
+    </plurals>
+    <string name="notif_pay_title">💳 Payment due: %1$s</string>
+    <string name="notif_pay_body">Payment %1$d of %2$d is due today. Tap to mark it paid and watch the balance shrink.</string>
+
+    <!-- Best day to buy -->
+    <string name="buy_advice_title">Best day to buy</string>
+    <string name="buy_intro_days">You\'ve wanted this for %1$s, so it\'s a real want.</string>
+    <string name="buy_intro_now">You still want this, so it\'s a real want.</string>
+    <string name="buy_when_today">today</string>
+    <string name="buy_when_tomorrow">tomorrow</string>
+    <string name="buy_when_on">on %1$s</string>
+    <string name="buy_sale">%1$s is %2$s. If you still want it then, that\'s a smart day to buy.</string>
+    <string name="buy_sale_after_payday">%1$s is %2$s, right after payday. Buy then and you get both.</string>
+    <string name="buy_wait_payday">%1$s is close, but payday is %2$s. Wait for payday so it doesn\'t stretch you. %3$s is coming anyway.</string>
+    <string name="buy_let_go_title">Still worth it?</string>
+    <string name="buy_let_go">Your want went from %1$s to %2$s. A sale is coming, but a sale alone isn\'t a reason. Maybe let this one go?</string>
+    <string name="notif_sale_eve_title">🛍️ %1$s is tomorrow</string>
+    <string name="notif_sale_eve_body">You waited on %1$s and still want it. If that\'s still true tomorrow, it\'s a smart day to buy.</string>
+    <string name="notif_payday_eve_title">💸 Payday is tomorrow</string>
+    <string name="notif_payday_eve_body">You waited on %1$s and still want it. After payday it won\'t stretch you, so tomorrow could be the day.</string>
+
+    <!-- Payday Sales -->
+    <string name="sale_payday_mid">15th Payday Sale</string>
+    <string name="sale_payday_end">Month-end Payday Sale</string>
+    <string name="set_sale_mid_desc">The shops\' mid-month sale. Ollie adds 2 days to new wishes that day.</string>
+    <string name="set_sale_end_desc">The shops\' sale on the 30th (last day in February). Ollie adds 2 days to new wishes that day.</string>
+    <string name="set_sale_note">Double-date sales like 10.10 and 11.11 are always on.</string>
+
+    <!-- Home screen widget -->
+    <string name="widget_description">Money kept, your next countdown, and a quick “Ask Ollie first” button.</string>
+    <string name="widget_kept">Kept so far</string>
+    <string name="widget_kept_placeholder">—</string>
+    <string name="widget_add">+ Ask Ollie first</string>
+    <string name="widget_empty">No wishes waiting. Nice and calm.</string>
+    <string name="widget_ready">✅ %1$s is ready. Still want it?</string>
+    <string name="widget_waiting">⏳ %1$s · %2$s</string>
+    <plurals name="widget_days_left">
+        <item quantity="one">%d day left</item>
+        <item quantity="other">%d days left</item>
+    </plurals>
+    <plurals name="widget_hours_left">
+        <item quantity="one">%d hour left</item>
+        <item quantity="other">%d hours left</item>
+    </plurals>
+    <plurals name="widget_more">
+        <item quantity="one">+%d more waiting</item>
+        <item quantity="other">+%d more waiting</item>
+    </plurals>
+    <string name="widget_sale_today">🏷️ %1$s today. Ask Ollie before you check out.</string>
+    <string name="widget_sale_tomorrow">🏷️ %1$s is tomorrow</string>
+
+    <!-- Wants per cutoff -->
+    <string name="msg_cutoff_intro">With this, wants this cutoff come to %1$s, %2$s of this cutoff\'s pay (counting what you\'ve run through WishWait).</string>
+    <string name="msg_cutoff_under">Still under your %1$s line. 👍</string>
+    <string name="msg_cutoff_over_days">That\'s past your %1$s line, so I added %2$s. Small buys add up fast.</string>
+    <string name="msg_cutoff_over">That\'s past your %1$s line. Small buys add up fast.</string>
+    <string name="buy_spread_title">Spread it out</string>
+    <string name="buy_spread">Your %1$s is lined up for the same day. Buying both would put wants at %2$s of that cutoff\'s pay, past your %3$s line. Buy this one from %4$s instead, when the next cutoff starts.</string>
+    <string name="over_line_title">Over your wants line</string>
+    <string name="over_line_body">Buying this brings wants this cutoff to %1$s, %2$s of this cutoff\'s pay. Your line is %3$s (counting what you\'ve run through WishWait).\n\n%4$s It\'s your call either way.</string>
+    <string name="over_line_next_payday">A new cutoff starts on payday, %1$s. Waiting until then keeps this from squeezing your budget.</string>
+    <string name="over_line_next_month">A new month starts on %1$s. Waiting until then keeps this from squeezing your budget.</string>
+    <string name="over_line_wait_payday">Wait for payday</string>
+    <string name="over_line_wait_month">Wait for next month</string>
+    <string name="over_line_buy">Buy anyway</string>
+    <string name="msg_wait_next_cutoff">Good call. I\'ll remind you on %1$s.</string>
+    <string name="home_cutoff_spent">🛍️ %1$s on wants this cutoff · %2$s of %3$s</string>
+    <string name="home_cutoff_spent_over">🛍️ %1$s on wants this cutoff · %2$s of %3$s, past your %4$s line</string>
+
+    <!-- No payday set: the month is the cutoff -->
+    <string name="msg_cutoff_intro_month">With this, wants this month come to %1$s, %2$s of your monthly pay (counting what you\'ve run through WishWait).</string>
+    <string name="buy_spread_month">Your %1$s is lined up for the same day. Buying both would put wants at %2$s of that month\'s pay, past your %3$s line. Buy this one from %4$s instead, when the new month starts.</string>
+    <string name="over_line_body_month">Buying this brings wants this month to %1$s, %2$s of your monthly pay. Your line is %3$s (counting what you\'ve run through WishWait).\n\n%4$s It\'s your call either way.</string>
+    <string name="home_cutoff_spent_month">🛍️ %1$s on wants this month · %2$s of %3$s</string>
+    <string name="home_cutoff_spent_over_month">🛍️ %1$s on wants this month · %2$s of %3$s, past your %4$s line</string>
+    <string name="calc_share_cutoff">\nThat\'s %1$s of the cutoff each payment lands in.</string>
+    <string name="calc_line_rule">⚠️ This payment alone is past your %1$s wants line for the cutoff it lands in. A shorter plan, a cheaper option, or saving up first keeps each cutoff breathing.</string>
+    <string name="calc_line_rule_month">⚠️ This payment alone is past your %1$s wants line for the month. A shorter plan, a cheaper option, or saving up first keeps each month breathing.</string>
+    <!-- Widget + best day to buy -->
+    <string name="widget_best_day">🏷️ %1$s · best day: %2$s</string>
+    <string name="widget_wait_payday">💸 %1$s · wait for payday, %2$s</string>
+    <string name="widget_spread">⏳ %1$s · best from %2$s</string>
+    <string name="widget_let_go">💭 %1$s · still want it?</string>
+
+    <string name="notif_end_body_later">You waited %1$s. Still want it? Ollie\'s tip: buy from %2$s so it fits your budget.</string>
+    <string name="notif_end_body_sale">You waited %1$s. Still want it? Ollie\'s tip: %2$s is the best day to buy.</string>
+    <string name="notif_end_body_faded">You waited %1$s, and your want has dropped since. Maybe let this one go and keep the money?</string>
+
+    <!-- Need or want -->
+    <string name="kind_title">Need or want?</string>
+    <string name="kind_want">✨ Want</string>
+    <string name="kind_need">🧰 Need</string>
+    <string name="kind_want_hint">Nothing wrong with wants. Ollie just makes sure they\'re worth it. Why do you want it?</string>
+    <string name="kind_need_hint">Needs get a shorter wait and never count toward your wants line. Which one is it?</string>
+    <string name="kind_need_error">Pick why it\'s a need, or switch to Want.</string>
+    <string name="tag_need">Need</string>
+    <string name="tag_want">Want</string>
+    <string name="edit_kind_note">The countdown stays as it is. Ollie\'s tips and your wants line follow the new choice.</string>
+
+    <!-- Terms and conditions -->
+    <string name="set_about">About</string>
+    <string name="set_terms">Terms and conditions</string>
+    <string name="set_terms_desc">How WishWait works, your data, and what Ollie can and can\'t do</string>
+    <string name="set_version">Version %1$s</string>
+    <string name="terms_title">Terms and conditions</string>
+    <string name="terms_effective">Effective October 9, 2026</string>
+    <string name="terms_intro">Thanks for using WishWait. These terms are written in plain words. By using the app, you agree to them.</string>
+    <string name="terms_about_title">1. What WishWait is</string>
+    <string name="terms_about_body">WishWait is a personal tool that helps you pause before buying. It works without an account, without AI and without ads. Ollie, the owl, gives rule-based suggestions from the numbers you enter.</string>
+    <string name="terms_advice_title">2. Not financial advice</string>
+    <string name="terms_advice_body">Ollie\'s waits, tips and calculations are estimates to help you think. They are not financial, legal or tax advice, and Ollie never knows your full situation. Every decision to buy, wait or let go is yours.</string>
+    <string name="terms_data_title">3. Your data stays on your phone</string>
+    <string name="terms_data_body">Everything you enter (wishes, prices, income, paydays, your goal) is saved only on this device. WishWait has no servers of its own, collects no analytics and shares nothing with anyone. A backup file goes only where you choose to save it, and you are responsible for keeping it safe. If Android backup is on for your phone, Android may also keep a copy in your own Google account backup; the developer never sees it. Uninstalling the app or using \"Erase all data\" deletes your data from this phone. If you turn on Google Drive backup, a copy is also saved in a hidden WishWait folder in your own Google Drive. Only your Google account can open it; the developer can\'t.</string>
+    <string name="terms_internet_title">4. When WishWait uses the internet</string>
+    <string name="terms_internet_body">When you open Support Ollie, Google Play loads the tip prices and handles any tip you choose to send. Otherwise, only when you share or paste a product link and \"Fill in details from shared links\" is on. WishWait then opens that public page to read its name and price, the same way a browser would. The store sees a normal page visit. You can turn this off anytime in Settings. When Google Drive backup is on, WishWait also sends its backup to your own Google Drive.</string>
+    <string name="terms_notifications_title">5. Notifications</string>
+    <string name="terms_notifications_body">Reminders are sent by your phone, only between 9 AM and 9 PM, and only if you allow them. You can switch them off in Settings.</string>
+    <string name="terms_accuracy_title">6. Prices, sales and stores</string>
+    <string name="terms_accuracy_body">Details read from links can be wrong or out of date, so please check them. Sale days (like 10.10) and Payday Sales are general calendar dates, not offers from any store. WishWait is not connected to or endorsed by any store or shopping app, and store names belong to their owners.</string>
+    <string name="terms_use_title">8. Using the app fairly</string>
+    <string name="terms_use_body">Please use WishWait for your own personal planning, and don\'t try to break, copy or resell the app.</string>
+    <string name="terms_liability_title">9. No guarantees</string>
+    <string name="terms_liability_body">WishWait is provided \"as is\". We work hard to keep it accurate and reliable, but we can\'t promise it will be error-free or always available. To the extent the law allows, we are not responsible for purchases you make or don\'t make, or for any loss of data or money.</string>
+    <string name="terms_changes_title">10. Changes</string>
+    <string name="terms_changes_body">We may update these terms when the app changes. The new version will show in the app with a new effective date. Continuing to use WishWait means you accept the update.</string>
+    <string name="terms_law_title">11. Governing law</string>
+    <string name="terms_law_body">These terms are governed by the laws of the Republic of the Philippines.</string>
+    <string name="terms_contact_title">12. Questions</string>
+    <string name="terms_contact_body">Reach the developer through the contact details on WishWait\'s Google Play listing.</string>
+
+    <!-- Support Ollie (tips) -->
+    <string name="set_tips">Support Ollie 🦉</string>
+    <string name="set_tips_desc">Optional thank-you tips. Nothing is ever locked.</string>
+    <string name="tip_title">Support Ollie</string>
+    <string name="tip_headline">Keep Ollie flying</string>
+    <string name="tip_body">WishWait is made by one developer. It\'s free, with no ads, no tracking and no account. If Ollie helped you keep some money, you can send a small thank-you.</string>
+    <string name="tip_rule_title">Ollie\'s rule applies to Ollie too</string>
+    <string name="tip_rule_body">A tip is a want. Send one only if it fits your budget. WishWait stays complete and free either way, and I\'m just happy you\'re here.</string>
+    <string name="tip_small_title">A little thanks</string>
+    <string name="tip_small_sub">Every bit helps</string>
+    <string name="tip_coffee_title">Coffee for Ollie</string>
+    <string name="tip_coffee_sub">Fuel for the next update</string>
+    <string name="tip_lunch_title">Lunch for Ollie</string>
+    <string name="tip_lunch_sub">You\'re amazing</string>
+    <string name="tip_button_cd">Send %1$s for %2$s</string>
+    <string name="tip_unavailable">Tips can\'t load right now. Check your internet connection and that WishWait was installed from Google Play, then try again.</string>
+    <string name="tip_retry">Try again</string>
+    <string name="tip_footer">Payments are handled by Google Play. Tips are one-time, unlock nothing, and refunds follow Google Play\'s refund policy.</string>
+    <string name="tip_pending">Your payment is still processing. Ollie will say thanks once it goes through.</string>
+    <string name="tip_cancelled">No worries. Ollie\'s just happy you\'re here.</string>
+    <string name="tip_failed">The tip didn\'t go through. Please try again later.</string>
+    <string name="tip_thanks_title">Salamat! 🦉</string>
+    <string name="tip_thanks_body">Ollie got your tip. Thank you for helping keep WishWait free, private and ad-free.</string>
+    <string name="tip_thanks_done">You\'re welcome</string>
+    <string name="ach_ollie_friend">Ollie\'s Friend</string>
+    <string name="ach_ollie_friend_desc">Sent Ollie a thank-you tip</string>
+    <string name="terms_tips_title">7. Optional tips</string>
+    <string name="terms_tips_body">You can send Ollie an optional tip through Google Play. Tips are voluntary, one-time payments and don\'t unlock any features or content. Google Play shows the price in your currency and processes the payment under its own terms. Refunds follow Google Play\'s refund policy.</string>
+    <plurals name="tip_given">
+        <item quantity="one">🦉💚 You\'ve sent Ollie %d tip. Salamat!</item>
+        <item quantity="other">🦉💚 You\'ve sent Ollie %d tips. Salamat!</item>
+    </plurals>
+
+    <!-- Google Drive backup (optional) -->
+    <string name="drive_title">Back up to Google Drive</string>
+    <string name="drive_title_on">Google Drive backup is on</string>
+    <string name="drive_desc">Optional. Sign in with Google and WishWait keeps a backup in a hidden folder in your own Drive, ready to restore on a new phone. No WishWait account, and only you can see it.</string>
+    <string name="drive_sign_in">Sign in with Google</string>
+    <string name="drive_account_unknown">Your Google account</string>
+    <string name="drive_last_backup">Last backup: %1$s</string>
+    <string name="drive_not_yet">Not backed up yet</string>
+    <string name="drive_on_desc">WishWait backs up by itself a couple of minutes after you make changes.</string>
+    <string name="drive_backup_now">Back up now</string>
+    <string name="drive_restore">Restore</string>
+    <string name="drive_turn_off">Turn off</string>
+    <string name="drive_unavailable">Couldn\'t connect to Google Drive. Check your internet and try again.</string>
+    <string name="drive_on">Google Drive backup is on. Your wishes are backed up ☁️</string>
+    <string name="drive_backed_up">Backed up to Google Drive ☁️</string>
+    <string name="drive_backup_failed">Couldn\'t back up right now. WishWait will try again later.</string>
+    <string name="drive_nothing_to_restore">No backup found in your Google Drive yet.</string>
+    <string name="drive_restored_on">Backup restored, and Google Drive backup is on 🎉</string>
+    <string name="drive_found_title">Backup found in your Drive</string>
+    <string name="drive_found_body">There\'s a backup from %1$s with %2$d wishes. Restore it to this phone? It replaces what\'s on this phone now. Or keep this phone\'s data, and it will replace the backup in Drive.</string>
+    <string name="drive_found_restore">Restore backup</string>
+    <string name="drive_found_keep">Keep this phone\'s data</string>
+    <string name="drive_off_title">Turn off Google Drive backup?</string>
+    <string name="drive_off_body">WishWait will stop backing up to your Drive. Your last backup stays there so you can restore it later.</string>
+    <string name="drive_off_delete">Also delete the backup from my Drive</string>
+    <string name="drive_off_kept">Google Drive backup is off. Your last backup is still in your Drive.</string>
+    <string name="drive_off_deleted">Google Drive backup is off, and the backup was deleted.</string>
+    <string name="drive_off_delete_failed">Google Drive backup is off, but the backup couldn\'t be deleted. Try again when you\'re online, or remove WishWait\'s access in your Google Account.</string>
+    <string name="backup_reminder">Weekly backup reminder</string>
+    <string name="backup_reminder_desc">A gentle nudge if you haven\'t saved a backup in a week.</string>
+    <string name="backup_reminder_desc_last">Last backup: %1$s. A gentle nudge if a week goes by without one.</string>
+    <string name="notif_backup_title">💾 Time for a quick backup</string>
+    <string name="notif_backup_body">It\'s been a week since your last backup. Save one in Settings, so your wishes are safe if you change phones.</string>
+</resources>
