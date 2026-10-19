@@ -18,6 +18,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.height
@@ -51,6 +52,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -328,7 +330,9 @@ private fun Badge(a: Achievement, unlocked: Boolean, modifier: Modifier = Modifi
     val description = stringResource(a.descriptionRes)
     val spoken = stringResource(if (unlocked) R.string.cd_badge_unlocked else R.string.cd_badge_locked, title, description)
     Card(
-        modifier = modifier.clearAndSetSemantics { contentDescription = spoken },
+        modifier = modifier
+            .height(168.dp)
+            .clearAndSetSemantics { contentDescription = spoken },
         colors = CardDefaults.cardColors(
             containerColor = if (unlocked) MaterialTheme.colorScheme.tertiaryContainer
             else MaterialTheme.colorScheme.surfaceContainerHigh,
@@ -337,19 +341,24 @@ private fun Badge(a: Achievement, unlocked: Boolean, modifier: Modifier = Modifi
         Column(
             Modifier
                 .fillMaxWidth()
+                .fillMaxHeight()
                 .padding(14.dp)
                 .alpha(if (unlocked) 1f else 0.62f),
             horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center,
         ) {
             Text(if (unlocked) a.emoji else "🔒", fontSize = 30.sp)
             Spacer(Modifier.height(6.dp))
-            Text(title, style = MaterialTheme.typography.titleSmall, textAlign = TextAlign.Center)
+            Text(title, style = MaterialTheme.typography.titleSmall, textAlign = TextAlign.Center, maxLines = 1)
+            Spacer(Modifier.height(2.dp))
             Text(
                 description,
                 style = MaterialTheme.typography.bodySmall,
                 textAlign = TextAlign.Center,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 minLines = 2,
+                maxLines = 2,
+                overflow = TextOverflow.Ellipsis,
             )
         }
     }
