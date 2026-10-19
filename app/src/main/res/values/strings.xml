@@ -294,6 +294,7 @@
     <string name="add_continue_sub">You can add more detail next</string>
     <string name="add_edit_wish">Edit wish</string>
     <string name="add_question">What\'s catching your eye?</string>
+    <string name="add_question_sub">Start with the basics.</string>
     <string name="field_what">What is it?</string>
     <string name="field_what_placeholder">e.g. New phone, sneakers, concert tickets</string>
     <string name="field_what_error">Give it a name</string>

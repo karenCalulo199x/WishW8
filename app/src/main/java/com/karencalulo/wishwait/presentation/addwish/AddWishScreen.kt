@@ -5,6 +5,7 @@ package com.karencalulo.wishwait.presentation.addwish
 import com.karencalulo.wishwait.presentation.components.GoalReachedDialog
 import androidx.compose.material.icons.rounded.ContentPaste
 import android.content.ClipboardManager
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.remember
@@ -68,6 +69,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
@@ -80,8 +82,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.karencalulo.wishwait.data.reminder.NotificationHelper
 import com.karencalulo.wishwait.domain.model.Category
@@ -197,6 +201,21 @@ fun AddWishScreen(
                     }
                 }
             },
+            bottomBar = {
+                when (state.step) {
+                    AddStep.BASICS -> StepBottomBar(
+                        buttonLabel = stringResource(R.string.add_continue),
+                        subLabel = stringResource(R.string.add_continue_sub),
+                        onClick = { onIntent(AddWishIntent.ContinueToReflect) },
+                    )
+                    AddStep.REFLECT -> StepBottomBar(
+                        buttonLabel = stringResource(R.string.add_ask, FriendVoice.name(res())),
+                        subLabel = if (state.profile.monthlyIncome <= 0) stringResource(R.string.add_income_tip) else null,
+                        onClick = { onIntent(AddWishIntent.AskFriend) },
+                    )
+                    AddStep.VERDICT -> {}
+                }
+            },
         ) { padding ->
             AnimatedContent(
                 targetState = state.step,
@@ -279,6 +298,33 @@ fun AddWishScreen(
     }
 }
 
+/** The primary action for each new-wish step, pinned to the bottom instead of scrolling with content. */
+@Composable
+private fun StepBottomBar(buttonLabel: String, subLabel: String?, onClick: () -> Unit) {
+    Surface(color = MaterialTheme.colorScheme.surface) {
+        Column(Modifier.padding(horizontal = 16.dp, vertical = 12.dp)) {
+            Button(
+                onClick = onClick,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(56.dp),
+            ) {
+                Text(buttonLabel, style = MaterialTheme.typography.titleMedium)
+            }
+            if (subLabel != null) {
+                Spacer(Modifier.height(8.dp))
+                Text(
+                    subLabel,
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.fillMaxWidth(),
+                )
+            }
+        }
+    }
+}
+
 private fun onStartCooldownAfterDismiss(
     onIntent: (AddWishIntent) -> Unit,
     onStartCooldown: () -> Unit,
@@ -298,7 +344,12 @@ private fun WishBasicsStep(state: AddWishState, onIntent: (AddWishIntent) -> Uni
         PasteLinkRow(state, onIntent)
         Spacer(Modifier.height(16.dp))
     }
-    Text(stringResource(R.string.add_question), style = MaterialTheme.typography.headlineSmall)
+    Text(stringResource(R.string.add_question), style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold)
+    Text(
+        stringResource(R.string.add_question_sub),
+        style = MaterialTheme.typography.bodyMedium,
+        color = MaterialTheme.colorScheme.onSurfaceVariant,
+    )
     Spacer(Modifier.height(16.dp))
     // Shared with missing details (TikTok: link only, Lazada: no price) → cursor goes to the first gap.
     val nameFocus = remember { FocusRequester() }
@@ -356,31 +407,42 @@ private fun WishBasicsStep(state: AddWishState, onIntent: (AddWishIntent) -> Uni
     FormLabel(stringResource(R.string.add_category))
     LazyRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
         items(Category.entries) { c ->
-            FilterChip(
+            CategoryTile(
+                category = c,
                 selected = state.category == c,
                 onClick = { onIntent(AddWishIntent.CategorySelected(c)) },
-                label = { Text("${c.emoji} ${stringResource(c.labelRes)}") },
             )
         }
     }
+}
 
-    Spacer(Modifier.height(24.dp))
-    Button(
-        onClick = { onIntent(AddWishIntent.ContinueToReflect) },
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(56.dp),
+@Composable
+private fun CategoryTile(category: Category, selected: Boolean, onClick: () -> Unit) {
+    Surface(
+        onClick = onClick,
+        shape = MaterialTheme.shapes.medium,
+        color = if (selected) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.surface,
+        border = BorderStroke(1.dp, if (selected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.outlineVariant),
+        modifier = Modifier.size(width = 76.dp, height = 72.dp),
     ) {
-        Text(stringResource(R.string.add_continue), style = MaterialTheme.typography.titleMedium)
+        Column(
+            Modifier
+                .fillMaxSize()
+                .padding(8.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center,
+        ) {
+            Text(category.emoji, fontSize = 22.sp)
+            Spacer(Modifier.height(4.dp))
+            Text(
+                stringResource(category.labelRes),
+                style = MaterialTheme.typography.labelSmall,
+                textAlign = TextAlign.Center,
+                maxLines = 1,
+                color = if (selected) MaterialTheme.colorScheme.onPrimaryContainer else MaterialTheme.colorScheme.onSurface,
+            )
+        }
     }
-    Spacer(Modifier.height(8.dp))
-    Text(
-        stringResource(R.string.add_continue_sub),
-        style = MaterialTheme.typography.bodySmall,
-        color = MaterialTheme.colorScheme.onSurfaceVariant,
-        textAlign = TextAlign.Center,
-        modifier = Modifier.fillMaxWidth(),
-    )
 }
 
 /** Step 2 of 2: why, and how badly. */
@@ -409,9 +471,6 @@ private fun WishReflectStep(state: AddWishState, onIntent: (AddWishIntent) -> Un
         modifier = Modifier.bringIntoViewRequester(kindBringIntoView),
     )
 
-    FormLabel(stringResource(R.string.add_desire), stringResource(R.string.add_desire_sub))
-    DesireSlider(selected = state.desire, onSelect = { onIntent(AddWishIntent.DesireChanged(it)) })
-
     Spacer(Modifier.height(16.dp))
     TextButton(onClick = { onIntent(AddWishIntent.ToggleDetails) }) {
         Text(stringResource(if (state.detailsExpanded) R.string.add_details_hide else R.string.add_details_show))
@@ -435,23 +494,8 @@ private fun WishReflectStep(state: AddWishState, onIntent: (AddWishIntent) -> Un
         }
     }
 
-    Spacer(Modifier.height(24.dp))
-    Button(
-        onClick = { onIntent(AddWishIntent.AskFriend) },
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(56.dp),
-    ) {
-        Text(stringResource(R.string.add_ask, FriendVoice.name(res())), style = MaterialTheme.typography.titleMedium)
-    }
-    if (state.profile.monthlyIncome <= 0) {
-        Spacer(Modifier.height(8.dp))
-        Text(
-            stringResource(R.string.add_income_tip),
-            style = MaterialTheme.typography.bodySmall,
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
-        )
-    }
+    FormLabel(stringResource(R.string.add_desire), stringResource(R.string.add_desire_sub))
+    DesireSlider(selected = state.desire, onSelect = { onIntent(AddWishIntent.DesireChanged(it)) })
 }
 
 @Composable

@@ -1,7 +1,10 @@
 package com.karencalulo.wishwait.presentation.components
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -31,6 +34,7 @@ import com.karencalulo.wishwait.presentation.common.labelRes
  * "Need or want?" — a Material 3 segmented button, then a single-select list of matching reasons.
  * A need must say why (broken / for work), so marking everything a need can't quietly skip the wait.
  */
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun NeedWantPicker(
     isNeed: Boolean,
@@ -58,24 +62,30 @@ fun NeedWantPicker(
             style = MaterialTheme.typography.bodySmall,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
         )
-        Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+        FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
             reasonsFor(isNeed).forEach { r ->
                 val selected = r in reasons
                 Surface(
                     onClick = { onReasonToggle(r) },
-                    shape = MaterialTheme.shapes.medium,
-                    color = if (selected) MaterialTheme.colorScheme.tertiaryContainer else MaterialTheme.colorScheme.surfaceContainerHigh,
-                    modifier = Modifier.fillMaxWidth(),
+                    shape = MaterialTheme.shapes.extraLarge,
+                    color = if (selected) MaterialTheme.colorScheme.tertiaryContainer else MaterialTheme.colorScheme.surface,
+                    border = if (selected) null else BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant),
                 ) {
                     Row(
-                        Modifier.padding(horizontal = 16.dp, vertical = 12.dp),
+                        Modifier.padding(horizontal = 14.dp, vertical = 10.dp),
                         verticalAlignment = Alignment.CenterVertically,
                     ) {
-                        Text(r.emoji, fontSize = 18.sp)
-                        Spacer(Modifier.width(12.dp))
-                        Text(stringResource(r.labelRes), modifier = Modifier.weight(1f))
+                        Text(r.emoji, fontSize = 16.sp)
+                        Spacer(Modifier.width(8.dp))
+                        Text(stringResource(r.labelRes), style = MaterialTheme.typography.labelLarge)
                         if (selected) {
-                            Icon(Icons.Rounded.Check, contentDescription = null, tint = MaterialTheme.colorScheme.onTertiaryContainer)
+                            Spacer(Modifier.width(8.dp))
+                            Icon(
+                                Icons.Rounded.Check,
+                                contentDescription = null,
+                                tint = MaterialTheme.colorScheme.onTertiaryContainer,
+                                modifier = Modifier.width(18.dp),
+                            )
                         }
                     }
                 }
