@@ -23,8 +23,8 @@ android {
         targetSdk = 36
         // Bump both for every Play upload: versionCode +1 (Play rejects a reused number),
         // versionName is what users see (1.0.1 for fixes, 1.1.0 for new features).
-        versionCode = 1
-        versionName = "1.0.0"
+        versionCode = 2
+        versionName = "1.1.0"
     }
 
     signingConfigs {

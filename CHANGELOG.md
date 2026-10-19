@@ -8,15 +8,27 @@ matching "what's new" copy for the Play listing lives in
 
 ## [Unreleased]
 
+## [1.1.0] - 2026-10-19
+
 ### Added
 - Cooldown presets (24h/3d/7d/30d) next to the day stepper when adding a wish.
 - Optional delivery fee, factored into a "true cost" shown on the verdict and
   wish detail screens.
 - Monthly bills field and budget-aware purchase advice (% of free budget a
   purchase would use).
-- Savings goal progress bar on the Wins screen.
-- Three new achievements (Early Saver, Second Thoughts, Week of Calm) and a
-  30-day activity calendar on the Wins screen.
+- Savings goal progress bar, a current "day streak", three new achievements
+  (Early Saver, Second Thoughts, Week of Calm), and a navigable activity
+  calendar on the Wins screen.
+- The New Wish form is now a 2-step flow (basics, then reflect) with a
+  Need↔Want emoji desire slider, a fixed bottom action button, and Ollie's
+  replies now type themselves out like a live chat.
+
+### Changed
+- Removed the mood picker — its cooldown effect (risky feelings add 50% wait)
+  now triggers from a high desire rating instead, same safety net, one less
+  question to answer.
+- Currency now defaults to the device's locale instead of hardcoded USD.
+- Ollie's verdict messages are warmer and more conversational.
 
 ### Fixed
 - Edge-to-edge system bars now use explicit, non-deprecated styling
