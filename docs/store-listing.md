@@ -49,7 +49,11 @@ Hello from Ollie! 🦉 This is the first version of WishWait: pause before you b
 - Privacy policy: https://karencalulo199x.github.io/WishW8/privacy-policy.html
 
 ## Graphics checklist
-- App icon: 512 × 512 PNG (32-bit, under 1 MB)
-- Feature graphic: 1024 × 500 PNG or JPG, no transparency
-- Phone screenshots: 2–8, at least 1080 px on the short side works best
-  - Suggested: Home with countdowns · Ollie's verdict · Best day to buy · Wins · Settings (Drive backup)
+- App icon: 512 × 512 PNG (32-bit, under 1 MB) — done, `store-graphics/app-icon-512.png`
+- Feature graphic: 1024 × 500 PNG or JPG, no transparency — done, `store-graphics/feature-graphic.png`
+- Phone screenshots: 2–8, at least 1080 px on the short side works best — done, `store-graphics/screenshots/` (1080×1920 PNG each)
+  1. `1-home.png` — Home with countdowns
+  2. `2-ollies-verdict.png` — Ollie's verdict
+  3. `3-best-day-to-buy.png` — Best day to buy
+  4. `4-wins.png` — Wins
+  5. `5-settings.png` — Settings (Drive backup)
