@@ -31,6 +31,8 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -338,8 +340,8 @@ private fun WishForm(state: AddWishState, onIntent: (AddWishIntent) -> Unit) {
     )
 
     FormLabel(stringResource(R.string.add_category))
-    FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-        Category.entries.forEach { c ->
+    LazyRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+        items(Category.entries) { c ->
             FilterChip(
                 selected = state.category == c,
                 onClick = { onIntent(AddWishIntent.CategorySelected(c)) },
