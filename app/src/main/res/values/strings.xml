@@ -286,7 +286,12 @@
 
     <!-- ===== Add wish ===== -->
     <string name="add_title_form">New wish</string>
+    <string name="add_title_reflect">Think it through</string>
     <string name="add_title_verdict">%1$s\'s take</string>
+    <string name="add_reflect_title">Let\'s think it through</string>
+    <string name="add_reflect_sub">No wrong answers — just your honest feelings.</string>
+    <string name="add_continue">Continue</string>
+    <string name="add_continue_sub">You can add more detail next</string>
     <string name="add_edit_wish">Edit wish</string>
     <string name="add_question">What\'s catching your eye?</string>
     <string name="field_what">What is it?</string>

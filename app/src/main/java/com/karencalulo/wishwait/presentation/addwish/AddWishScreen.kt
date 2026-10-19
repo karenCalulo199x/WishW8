@@ -22,6 +22,7 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.slideInVertically
@@ -62,6 +63,7 @@ import androidx.compose.material3.FilledTonalIconButton
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
@@ -160,23 +162,40 @@ fun AddWishScreen(
     onClose: () -> Unit,
     onStartCooldown: () -> Unit,
 ) {
-    BackHandler(enabled = state.step == AddStep.VERDICT) { onIntent(AddWishIntent.BackToForm) }
+    BackHandler(enabled = state.step != AddStep.BASICS) { onIntent(AddWishIntent.Back) }
 
     Box(Modifier.fillMaxSize()) {
         Scaffold(
             topBar = {
-                TopAppBar(
-                    title = { Text(if (state.step == AddStep.FORM) stringResource(R.string.add_title_form) else stringResource(R.string.add_title_verdict, FriendVoice.name(res()))) },
-                    navigationIcon = {
-                        if (state.step == AddStep.FORM) {
-                            IconButton(onClick = onClose) { Icon(Icons.Rounded.Close, contentDescription = stringResource(R.string.action_close)) }
-                        } else {
-                            IconButton(onClick = { onIntent(AddWishIntent.BackToForm) }) {
-                                Icon(Icons.AutoMirrored.Rounded.ArrowBack, contentDescription = stringResource(R.string.add_edit_wish))
+                Column {
+                    TopAppBar(
+                        title = {
+                            Text(
+                                when (state.step) {
+                                    AddStep.BASICS -> stringResource(R.string.add_title_form)
+                                    AddStep.REFLECT -> stringResource(R.string.add_title_reflect)
+                                    AddStep.VERDICT -> stringResource(R.string.add_title_verdict, FriendVoice.name(res()))
+                                },
+                            )
+                        },
+                        navigationIcon = {
+                            if (state.step == AddStep.BASICS) {
+                                IconButton(onClick = onClose) { Icon(Icons.Rounded.Close, contentDescription = stringResource(R.string.action_close)) }
+                            } else {
+                                IconButton(onClick = { onIntent(AddWishIntent.Back) }) {
+                                    Icon(Icons.AutoMirrored.Rounded.ArrowBack, contentDescription = stringResource(R.string.add_edit_wish))
+                                }
                             }
-                        }
-                    },
-                )
+                        },
+                    )
+                    if (state.step != AddStep.VERDICT) {
+                        val progress by animateFloatAsState(
+                            if (state.step == AddStep.BASICS) 0.5f else 1f,
+                            label = "add-wish-progress",
+                        )
+                        LinearProgressIndicator(progress = { progress }, modifier = Modifier.fillMaxWidth())
+                    }
+                }
             },
         ) { padding ->
             AnimatedContent(
@@ -193,7 +212,8 @@ fun AddWishScreen(
                         .padding(horizontal = 16.dp, vertical = 8.dp),
                 ) {
                     when (step) {
-                        AddStep.FORM -> WishForm(state, onIntent)
+                        AddStep.BASICS -> WishBasicsStep(state, onIntent)
+                        AddStep.REFLECT -> WishReflectStep(state, onIntent)
                         AddStep.VERDICT -> state.verdict?.let { VerdictContent(state, it, onIntent, onStartCooldown) }
                     }
                     Spacer(Modifier.height(32.dp))
@@ -267,10 +287,10 @@ private fun onStartCooldownAfterDismiss(
     onStartCooldown()
 }
 
+/** Step 1 of 2: what it is, what it costs. */
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
-private fun WishForm(state: AddWishState, onIntent: (AddWishIntent) -> Unit) {
-    val money = LocalMoney.current
+private fun WishBasicsStep(state: AddWishState, onIntent: (AddWishIntent) -> Unit) {
     if (state.fromShare) {
         SharedBanner(state)
         Spacer(Modifier.height(16.dp))
@@ -283,11 +303,6 @@ private fun WishForm(state: AddWishState, onIntent: (AddWishIntent) -> Unit) {
     // Shared with missing details (TikTok: link only, Lazada: no price) → cursor goes to the first gap.
     val nameFocus = remember { FocusRequester() }
     val priceFocus = remember { FocusRequester() }
-    // "Need" picked without saying why → scroll the picker into view so the hint is seen.
-    val kindBringIntoView = remember { BringIntoViewRequester() }
-    LaunchedEffect(state.needReasonError) {
-        if (state.needReasonError) runCatching { kindBringIntoView.bringIntoView() }
-    }
     val needsName = state.fromShare && !state.sharedNameFound
     val needsPrice = state.fromShare && !state.sharedPriceFound
     LaunchedEffect(needsName, needsPrice, state.lookingUp) {
@@ -349,7 +364,42 @@ private fun WishForm(state: AddWishState, onIntent: (AddWishIntent) -> Unit) {
         }
     }
 
-    FormLabel(stringResource(R.string.kind_title))
+    Spacer(Modifier.height(24.dp))
+    Button(
+        onClick = { onIntent(AddWishIntent.ContinueToReflect) },
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(56.dp),
+    ) {
+        Text(stringResource(R.string.add_continue), style = MaterialTheme.typography.titleMedium)
+    }
+    Spacer(Modifier.height(8.dp))
+    Text(
+        stringResource(R.string.add_continue_sub),
+        style = MaterialTheme.typography.bodySmall,
+        color = MaterialTheme.colorScheme.onSurfaceVariant,
+        textAlign = TextAlign.Center,
+        modifier = Modifier.fillMaxWidth(),
+    )
+}
+
+/** Step 2 of 2: why, and how badly. */
+@Composable
+private fun WishReflectStep(state: AddWishState, onIntent: (AddWishIntent) -> Unit) {
+    // "Need" picked without saying why → scroll the picker into view so the hint is seen.
+    val kindBringIntoView = remember { BringIntoViewRequester() }
+    LaunchedEffect(state.needReasonError) {
+        if (state.needReasonError) runCatching { kindBringIntoView.bringIntoView() }
+    }
+
+    Text(stringResource(R.string.add_reflect_title), style = MaterialTheme.typography.headlineSmall)
+    Text(
+        stringResource(R.string.add_reflect_sub),
+        style = MaterialTheme.typography.bodyMedium,
+        color = MaterialTheme.colorScheme.onSurfaceVariant,
+    )
+    Spacer(Modifier.height(16.dp))
+
     NeedWantPicker(
         isNeed = state.isNeed,
         reasons = state.reasons,

@@ -88,14 +88,29 @@ class AddWishViewModel(
                 copy(isNeed = intent.isNeed, reasons = reasonsAfterSwitch(reasons, intent.isNeed), needReasonError = false)
             }
             is AddWishIntent.ReasonToggled -> setState {
-                // Only reasons that match the current choice can be picked.
-                if (intent.value.isNeed != isNeed) this else copy(reasons = reasons.toggle(intent.value), needReasonError = false)
+                // Only reasons that match the current choice can be picked. Single-select: tapping
+                // the selected reason again clears it, tapping another replaces the pick.
+                if (intent.value.isNeed != isNeed) {
+                    this
+                } else {
+                    val newReasons = if (reasons == setOf(intent.value)) emptySet() else setOf(intent.value)
+                    copy(reasons = newReasons, needReasonError = false)
+                }
             }
             is AddWishIntent.NoteChanged -> setState { copy(note = intent.value.take(280)) }
             is AddWishIntent.DesireChanged -> setState { copy(desire = intent.value) }
             AddWishIntent.AskFriend -> askFriend()
             AddWishIntent.ToggleDetails -> setState { copy(detailsExpanded = !detailsExpanded) }
-            AddWishIntent.BackToForm -> setState { copy(step = AddStep.FORM) }
+            AddWishIntent.ContinueToReflect -> continueToReflect()
+            AddWishIntent.Back -> setState {
+                copy(
+                    step = when (step) {
+                        AddStep.REFLECT -> AddStep.BASICS
+                        AddStep.VERDICT -> AddStep.REFLECT
+                        AddStep.BASICS -> AddStep.BASICS
+                    },
+                )
+            }
             is AddWishIntent.AdjustDays -> setState {
                 copy(chosenDays = (chosenDays + intent.delta).coerceIn(0, BuildVerdictUseCase.MAX_DAYS))
             }
@@ -161,6 +176,19 @@ class AddWishViewModel(
         lookUpMissingDetails()
     }
 
+    /** Step 1 (basics) -> step 2 (reflect): only the name/price are required to move on. */
+    private fun continueToReflect() {
+        val s = currentState
+        val price = Fmt.parseAmount(s.price)
+        val nameError = s.name.isBlank()
+        val priceError = price == null || price <= 0.0
+        if (nameError || priceError) {
+            setState { copy(nameError = nameError, priceError = priceError) }
+        } else {
+            setState { copy(step = AddStep.REFLECT) }
+        }
+    }
+
     private fun askFriend() {
         val s = currentState
         val price = Fmt.parseAmount(s.price)
@@ -168,7 +196,17 @@ class AddWishViewModel(
         val priceError = price == null || price <= 0.0
         val needReasonError = s.isNeed && s.reasons.none { it.isNeed }
         if (nameError || priceError || needReasonError) {
-            setState { copy(nameError = nameError, priceError = priceError, needReasonError = needReasonError) }
+            // Name/price shouldn't fail here since step 1 already checked them, but if they
+            // somehow did, send the user back to where those fields actually live.
+            val backToBasics = nameError || priceError
+            setState {
+                copy(
+                    nameError = nameError,
+                    priceError = priceError,
+                    needReasonError = needReasonError,
+                    step = if (backToBasics) AddStep.BASICS else step,
+                )
+            }
             return
         }
         val deliveryFee = Fmt.parseAmount(s.deliveryFee) ?: 0.0
@@ -220,8 +258,6 @@ class AddWishViewModel(
             }
         }
     }
-
-    private fun <T> Set<T>.toggle(item: T): Set<T> = if (item in this) this - item else this + item
 }
 
 /** Raw text handed over by another app's share sheet. */

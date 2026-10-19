@@ -7,10 +7,10 @@ import com.karencalulo.wishwait.domain.model.Reason
 import com.karencalulo.wishwait.domain.model.UserProfile
 import com.karencalulo.wishwait.domain.model.Verdict
 
-enum class AddStep { FORM, VERDICT }
+enum class AddStep { BASICS, REFLECT, VERDICT }
 
 data class AddWishState(
-    val step: AddStep = AddStep.FORM,
+    val step: AddStep = AddStep.BASICS,
     val name: String = "",
     val price: String = "",
     val deliveryFee: String = "",
@@ -60,7 +60,8 @@ sealed interface AddWishIntent {
     data class DesireChanged(val value: Int) : AddWishIntent
     data object AskFriend : AddWishIntent
     data object ToggleDetails : AddWishIntent
-    data object BackToForm : AddWishIntent
+    data object ContinueToReflect : AddWishIntent
+    data object Back : AddWishIntent
     data class AdjustDays(val delta: Int) : AddWishIntent
     data class SetDays(val value: Int) : AddWishIntent
     data object StartCooldown : AddWishIntent
