@@ -21,6 +21,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -30,6 +31,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
@@ -82,11 +84,12 @@ fun WinsScreen(state: WinsState, onOpenWish: (String) -> Unit) {
                     Column(Modifier.padding(20.dp)) {
                         Text(stringResource(R.string.wins_kept), style = MaterialTheme.typography.labelLarge)
                         Text(money.format(stats.savedTotal), style = MaterialTheme.typography.displaySmall)
-                        Spacer(Modifier.height(4.dp))
-                        Text(
-                            winsLine(stats.letGoCount, stats.mindfulBuys, stats.impulseBuys),
-                            style = MaterialTheme.typography.bodyMedium,
-                        )
+                        Spacer(Modifier.height(14.dp))
+                        Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                            state.streakDays?.let { HeroStat("🔥", "$it", stringResource(R.string.wins_streak), Modifier.weight(1f)) }
+                            HeroStat("🕊️", "${stats.letGoCount}", stringResource(R.string.wins_let_go), Modifier.weight(1f))
+                            HeroStat("✅", "${stats.mindfulBuys}", stringResource(R.string.wins_mindful), Modifier.weight(1f))
+                        }
                         state.goal?.let { goal ->
                             Spacer(Modifier.height(14.dp))
                             Row(verticalAlignment = Alignment.CenterVertically) {
@@ -117,13 +120,7 @@ fun WinsScreen(state: WinsState, onOpenWish: (String) -> Unit) {
             }
             item {
                 Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                    StatTile("🕊️", "${stats.letGoCount}", stringResource(R.string.wins_let_go), Modifier.weight(1f))
-                    StatTile("✅", "${stats.mindfulBuys}", stringResource(R.string.wins_mindful), Modifier.weight(1f))
                     StatTile("⚡", "${stats.impulseBuys}", stringResource(R.string.wins_early), Modifier.weight(1f))
-                }
-            }
-            item {
-                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                     StatTile("⏱️", Fmt.hours(res(), stats.hoursSaved), stringResource(R.string.wins_hours), Modifier.weight(1f))
                     StatTile(
                         "📉",
@@ -134,20 +131,14 @@ fun WinsScreen(state: WinsState, onOpenWish: (String) -> Unit) {
                 }
             }
 
-            item {
-                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                    StatTile("💚", "${stats.lovedCount}", stringResource(R.string.wins_loved), Modifier.weight(1f))
-                    StatTile("😕", "${stats.regrettedCount}", stringResource(R.string.wins_regretted), Modifier.weight(1f))
-                }
-            }
-
             // The thank-you badge only appears once earned, so it never reads as "pay to complete".
             val badges = Achievement.entries.filter { !it.hiddenUntilUnlocked || it in stats.unlocked }
             item { SectionTitle(stringResource(R.string.wins_badges, stats.unlocked.size, badges.size)) }
-            items(badges.chunked(2)) { pair ->
-                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                    pair.forEach { a -> Badge(a, unlocked = a in stats.unlocked, modifier = Modifier.weight(1f)) }
-                    if (pair.size == 1) Spacer(Modifier.weight(1f))
+            item {
+                LazyRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    items(badges, key = { it.name }) { a ->
+                        Badge(a, unlocked = a in stats.unlocked, modifier = Modifier.width(120.dp))
+                    }
                 }
             }
 
@@ -171,6 +162,25 @@ fun WinsScreen(state: WinsState, onOpenWish: (String) -> Unit) {
                     )
                 }
             }
+        }
+    }
+}
+
+@Composable
+private fun HeroStat(emoji: String, value: String, label: String, modifier: Modifier = Modifier) {
+    Surface(
+        modifier = modifier,
+        shape = MaterialTheme.shapes.medium,
+        color = MaterialTheme.colorScheme.surface.copy(alpha = 0.5f),
+    ) {
+        Column(Modifier.padding(horizontal = 10.dp, vertical = 10.dp), horizontalAlignment = Alignment.CenterHorizontally) {
+            Text("$emoji $value", style = MaterialTheme.typography.titleMedium, maxLines = 1)
+            Text(
+                label,
+                style = MaterialTheme.typography.labelSmall,
+                textAlign = TextAlign.Center,
+                maxLines = 1,
+            )
         }
     }
 }
@@ -210,7 +220,11 @@ private fun DayDot(cell: DayCell, modifier: Modifier = Modifier) {
             .background(color),
         contentAlignment = Alignment.Center,
     ) {
-        Text("$day", style = MaterialTheme.typography.labelSmall)
+        if (cell.emoji != null) {
+            Text(cell.emoji, style = MaterialTheme.typography.labelMedium)
+        } else {
+            Text("$day", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+        }
     }
 }
 
@@ -228,15 +242,6 @@ private fun LegendDot(color: Color, label: String) {
     }
 }
 
-@Composable
-private fun winsLine(letGo: Int, mindful: Int, impulse: Int): String {
-    val total = letGo + mindful + impulse
-    return if (total == 0) {
-        stringResource(R.string.wins_line_none)
-    } else {
-        stringResource(R.string.wins_line, letGo + mindful, total)
-    }
-}
 
 @Composable
 private fun Badge(a: Achievement, unlocked: Boolean, modifier: Modifier = Modifier) {

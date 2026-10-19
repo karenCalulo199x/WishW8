@@ -19,6 +19,7 @@ data class WinsState(
     val averageDesireDrop: Double? = null,
     val goal: SavingsGoal? = null,
     val calendar: List<DayCell> = emptyList(),
+    val streakDays: Int? = null,
 )
 
 sealed interface WinsIntent
@@ -45,6 +46,7 @@ class WinsViewModel(
                             ?.average(),
                         goal = goal,
                         calendar = buildActivityCalendar(wishes),
+                        streakDays = computeMindfulStreak(wishes),
                     )
                 }
             }

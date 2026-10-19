@@ -519,6 +519,7 @@
     <string name="wins_line_none">Your first decision is coming. Patience pays — literally.</string>
     <string name="wins_line">%1$d of %2$d decisions made with a clear head. Keep it up!</string>
     <string name="wins_goal_progress">%1$s Saving for %2$s</string>
+    <string name="wins_streak">day streak</string>
     <string name="wins_calendar">Last 30 days</string>
     <string name="wins_calendar_active">Mindful decision</string>
     <string name="wins_calendar_missed">Impulse buy</string>
