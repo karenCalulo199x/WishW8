@@ -21,5 +21,9 @@ keystore.properties
 *.aab
 *.apk
 
-# Notes and docs (kept on this Mac only)
+# Notes and docs (kept on this Mac only), except tracked release docs
 *.md
+!README.md
+!CHANGELOG.md
+!docs/store-listing.md
+!docs/releases/**/*.md
