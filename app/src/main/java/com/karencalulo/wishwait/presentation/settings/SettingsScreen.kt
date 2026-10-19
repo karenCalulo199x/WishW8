@@ -256,6 +256,12 @@ fun SettingsScreen(
                 onValueChange = { onIntent(SettingsIntent.SavingsChanged(it)) },
                 label = stringResource(R.string.set_savings),
                 prefix = symbol,
+            )
+            AmountField(
+                value = state.bills,
+                onValueChange = { onIntent(SettingsIntent.BillsChanged(it)) },
+                label = stringResource(R.string.set_bills),
+                prefix = symbol,
                 imeAction = ImeAction.Done,
             )
             Button(

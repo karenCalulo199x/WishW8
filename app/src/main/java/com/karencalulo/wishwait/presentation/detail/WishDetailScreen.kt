@@ -380,6 +380,13 @@ private fun Header(wish: Wish, impact: PriceImpact?) {
         Spacer(Modifier.width(16.dp))
         Column {
             Text(money.format(wish.price), style = MaterialTheme.typography.headlineMedium)
+            if (wish.deliveryFee > 0) {
+                Text(
+                    stringResource(R.string.verdict_true_cost, money.format(wish.trueCost), money.format(wish.price), money.format(wish.deliveryFee)),
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                )
+            }
             if (impact != null) {
                 Text(
                     stringResource(

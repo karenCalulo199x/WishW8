@@ -76,6 +76,8 @@ data class Wish(
     /** Store link from "Share to WishWait". Hidden while cooling down — out of sight, out of mind. */
     val link: String? = null,
     val store: String? = null,
+    /** Delivery/shipping fee, on top of the item price. */
+    val deliveryFee: Double = 0.0,
 ) {
     /** The profile as it was when this wish was added (falls back to [current] for old data). */
     fun profileAtCreation(current: UserProfile): UserProfile = current.copy(
@@ -83,8 +85,11 @@ data class Wish(
         hoursPerMonth = hoursAtCreation?.takeIf { it > 0 } ?: current.hoursPerMonth,
     )
 
-    /** What the purchase really costs, including installment interest. */
-    val costBasis: Double get() = payment?.totalPaid ?: price
+    /** Price plus delivery fee — what you'd actually pay today, before any installment interest. */
+    val trueCost: Double get() = price + deliveryFee
+
+    /** What the purchase really costs: delivery fee plus installment interest, if any. */
+    val costBasis: Double get() = (payment?.totalPaid ?: price) + deliveryFee
 
     /** When we ask "Still happy with it?" */
     val regretCheckAt: Long? get() = decidedAt?.let { it + REGRET_CHECK_DAYS * DAY_MS }
@@ -169,6 +174,8 @@ data class UserProfile(
     val monthlyIncome: Double = 0.0,
     val hoursPerMonth: Int = DEFAULT_HOURS_PER_MONTH,
     val monthlySavings: Double = 0.0,
+    /** Monthly bills/fixed expenses, used to work out what's actually free to spend. */
+    val monthlyBills: Double = 0.0,
     val currencyCode: String = "USD",
     val strictness: Strictness = Strictness.BALANCED,
     val onboarded: Boolean = false,
@@ -184,6 +191,14 @@ data class UserProfile(
 ) {
     val hourlyRate: Double
         get() = if (hoursPerMonth > 0 && monthlyIncome > 0) monthlyIncome / hoursPerMonth else 0.0
+
+    /** What's left of monthly income after bills and the savings target — what's actually free to spend. */
+    val availableBudget: Double
+        get() = (monthlyIncome - monthlyBills - monthlySavings).coerceAtLeast(0.0)
+
+    /** Share of [availableBudget] a purchase of [amount] would use, or null when no budget is set. */
+    fun budgetShare(amount: Double): Double? =
+        availableBudget.takeIf { it > 0 }?.let { amount / it }
 
     companion object {
         const val DEFAULT_HOURS_PER_MONTH = 160

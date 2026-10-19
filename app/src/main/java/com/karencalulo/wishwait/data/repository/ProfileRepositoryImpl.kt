@@ -29,6 +29,7 @@ class ProfileRepositoryImpl(
         val income = doublePreferencesKey("income")
         val hours = intPreferencesKey("hours_per_month")
         val savings = doublePreferencesKey("monthly_savings")
+        val bills = doublePreferencesKey("monthly_bills")
         val currency = stringPreferencesKey("currency")
         val strictness = stringPreferencesKey("strictness")
         val onboarded = booleanPreferencesKey("onboarded")
@@ -53,6 +54,7 @@ class ProfileRepositoryImpl(
             prefs[Keys.income] = p.monthlyIncome
             prefs[Keys.hours] = p.hoursPerMonth
             prefs[Keys.savings] = p.monthlySavings
+            prefs[Keys.bills] = p.monthlyBills
             prefs[Keys.currency] = p.currencyCode
             prefs[Keys.strictness] = p.strictness.name
             prefs[Keys.onboarded] = p.onboarded
@@ -66,7 +68,7 @@ class ProfileRepositoryImpl(
 
     override suspend fun reset() {
         dataStore.edit { prefs ->
-            listOf(Keys.income, Keys.hours, Keys.savings, Keys.currency, Keys.strictness, Keys.onboarded, Keys.reminders, Keys.fetchLinks, Keys.paydays, Keys.paydaySales, Keys.tipsGiven)
+            listOf(Keys.income, Keys.hours, Keys.savings, Keys.bills, Keys.currency, Keys.strictness, Keys.onboarded, Keys.reminders, Keys.fetchLinks, Keys.paydays, Keys.paydaySales, Keys.tipsGiven)
                 .forEach { prefs.remove(it) }
         }
     }
@@ -75,6 +77,7 @@ class ProfileRepositoryImpl(
         monthlyIncome = this[Keys.income] ?: 0.0,
         hoursPerMonth = this[Keys.hours] ?: UserProfile.DEFAULT_HOURS_PER_MONTH,
         monthlySavings = this[Keys.savings] ?: 0.0,
+        monthlyBills = this[Keys.bills] ?: 0.0,
         currencyCode = this[Keys.currency] ?: deviceCurrency(),
         strictness = Strictness.entries.firstOrNull { it.name == this[Keys.strictness] } ?: Strictness.BALANCED,
         onboarded = this[Keys.onboarded] ?: false,

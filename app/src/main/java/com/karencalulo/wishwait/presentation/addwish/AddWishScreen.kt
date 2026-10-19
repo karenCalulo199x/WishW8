@@ -323,8 +323,15 @@ private fun WishForm(state: AddWishState, onIntent: (AddWishIntent) -> Unit) {
         label = stringResource(R.string.field_price),
         isError = state.priceError,
         supportingText = hint,
-        imeAction = ImeAction.Done,
+        imeAction = ImeAction.Next,
         textStyle = MaterialTheme.typography.titleLarge,
+    )
+    Spacer(Modifier.height(8.dp))
+    MoneyField(
+        value = state.deliveryFee,
+        onValueChange = { onIntent(AddWishIntent.DeliveryFeeChanged(it)) },
+        label = stringResource(R.string.field_delivery_fee),
+        imeAction = ImeAction.Done,
     )
 
     FormLabel(stringResource(R.string.add_category))
@@ -429,6 +436,31 @@ private fun VerdictContent(
                 "${state.category.emoji} ${state.name} · ${money.format(impact.price)}",
                 style = MaterialTheme.typography.titleMedium,
             )
+            val deliveryFee = Fmt.parseAmount(state.deliveryFee) ?: 0.0
+            if (deliveryFee > 0) {
+                val itemPrice = Fmt.parseAmount(state.price) ?: 0.0
+                Text(
+                    stringResource(
+                        R.string.verdict_true_cost,
+                        money.format(impact.price),
+                        money.format(itemPrice),
+                        money.format(deliveryFee),
+                    ),
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                )
+            }
+            state.profile.budgetShare(impact.price)?.let { share ->
+                Text(
+                    if (share > 1.0) {
+                        stringResource(R.string.verdict_over_budget, money.format(state.profile.availableBudget))
+                    } else {
+                        stringResource(R.string.verdict_budget_share, Fmt.percent(share), money.format(state.profile.availableBudget))
+                    },
+                    style = MaterialTheme.typography.bodySmall,
+                    color = if (share > 1.0) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.onSurfaceVariant,
+                )
+            }
             Spacer(Modifier.height(12.dp))
             Row(verticalAlignment = Alignment.Bottom) {
                 Text(
@@ -522,6 +554,17 @@ private fun VerdictContent(
                 else -> stringResource(R.string.verdict_decide_on, decideDate(state.chosenDays))
             }
             Text(sub, style = MaterialTheme.typography.bodySmall, textAlign = TextAlign.Center)
+
+            Spacer(Modifier.height(12.dp))
+            FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                for (preset in COOLDOWN_PRESETS) {
+                    FilterChip(
+                        selected = state.chosenDays == preset,
+                        onClick = { onIntent(AddWishIntent.SetDays(preset)) },
+                        label = { Text(Fmt.days(res(), preset)) },
+                    )
+                }
+            }
         }
     }
 
@@ -579,6 +622,8 @@ private fun VerdictContent(
 }
 
 private fun decideDate(days: Int): String = Fmt.date(System.currentTimeMillis() + days * DAY_MS)
+
+private val COOLDOWN_PRESETS = listOf(1, 3, 7, 30)
 
 @Composable
 private fun SharedBanner(state: AddWishState) {

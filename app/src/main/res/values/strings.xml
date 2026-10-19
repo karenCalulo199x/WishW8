@@ -120,6 +120,12 @@
     <string name="ach_debt_free_desc">Finished paying off an installment</string>
     <string name="ach_goal_getter">Goal Getter</string>
     <string name="ach_goal_getter_desc">Reached a savings goal</string>
+    <string name="ach_early_saver">Early Saver</string>
+    <string name="ach_early_saver_desc">Started building real savings</string>
+    <string name="ach_ten_reconsidered">Second Thoughts</string>
+    <string name="ach_ten_reconsidered_desc">Reconsidered and let go of 10 wishes</string>
+    <string name="ach_week_streak">Week of Calm</string>
+    <string name="ach_week_streak_desc">7 days of clear-headed decisions</string>
 
     <!-- ===== Desire ===== -->
     <string name="desire_1">Meh</string>
@@ -287,6 +293,10 @@
     <string name="field_what_error">Give it a name</string>
     <string name="field_price">Price</string>
     <string name="field_price_error">Enter the price</string>
+    <string name="field_delivery_fee">Delivery fee (optional)</string>
+    <string name="verdict_true_cost">True cost: %1$s (item %2$s + delivery %3$s)</string>
+    <string name="verdict_budget_share">Uses %1$s of your free budget (%2$s left after bills &amp; savings)</string>
+    <string name="verdict_over_budget">This is more than your whole free budget this month (%1$s left after bills &amp; savings)</string>
     <string name="price_work_hint">≈ %1$s of your work</string>
     <string name="add_category">Category</string>
     <string name="add_why_sub">Pick all that apply — be honest, it\'s just us</string>
@@ -508,6 +518,11 @@
     <string name="wins_kept">Money you kept by letting go</string>
     <string name="wins_line_none">Your first decision is coming. Patience pays — literally.</string>
     <string name="wins_line">%1$d of %2$d decisions made with a clear head. Keep it up!</string>
+    <string name="wins_goal_progress">%1$s Saving for %2$s</string>
+    <string name="wins_calendar">Last 30 days</string>
+    <string name="wins_calendar_active">Mindful decision</string>
+    <string name="wins_calendar_missed">Impulse buy</string>
+    <string name="wins_calendar_none">No activity</string>
     <string name="wins_let_go">let go</string>
     <string name="wins_mindful">mindful buys</string>
     <string name="wins_early">early buys</string>
@@ -524,6 +539,7 @@
     <!-- ===== Settings ===== -->
     <string name="set_money">Your money</string>
     <string name="set_savings">Monthly savings capacity</string>
+    <string name="set_bills">Monthly bills</string>
     <string name="set_currency">Currency</string>
     <string name="set_strictness">Cooldown strictness</string>
     <string name="set_strictness_note">%1$s Cooldown changes apply to wishes you add from now on.</string>

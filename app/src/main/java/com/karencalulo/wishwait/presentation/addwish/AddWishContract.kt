@@ -13,6 +13,7 @@ data class AddWishState(
     val step: AddStep = AddStep.FORM,
     val name: String = "",
     val price: String = "",
+    val deliveryFee: String = "",
     val category: Category = Category.GADGETS,
     /** Need or want, picked by the user. A need must also say why (a need reason). */
     val isNeed: Boolean = false,
@@ -50,6 +51,7 @@ sealed interface AddWishIntent {
     data class PasteLink(val text: String?) : AddWishIntent
     data class NameChanged(val value: String) : AddWishIntent
     data class PriceChanged(val value: String) : AddWishIntent
+    data class DeliveryFeeChanged(val value: String) : AddWishIntent
     data class CategorySelected(val value: Category) : AddWishIntent
     data class KindChanged(val isNeed: Boolean) : AddWishIntent
     data class ReasonToggled(val value: Reason) : AddWishIntent
@@ -59,6 +61,7 @@ sealed interface AddWishIntent {
     data object AskFriend : AddWishIntent
     data object BackToForm : AddWishIntent
     data class AdjustDays(val delta: Int) : AddWishIntent
+    data class SetDays(val value: Int) : AddWishIntent
     data object StartCooldown : AddWishIntent
     data object BuyNowRequested : AddWishIntent
     data object BuyNowConfirmed : AddWishIntent

@@ -82,6 +82,7 @@ class AddWishViewModel(
             is AddWishIntent.PasteLink -> pasteLink(intent.text)
             is AddWishIntent.NameChanged -> setState { copy(name = intent.value.take(60), nameError = false) }
             is AddWishIntent.PriceChanged -> setState { copy(price = Fmt.sanitizeAmount(intent.value), priceError = false) }
+            is AddWishIntent.DeliveryFeeChanged -> setState { copy(deliveryFee = Fmt.sanitizeAmount(intent.value)) }
             is AddWishIntent.CategorySelected -> setState { copy(category = intent.value) }
             is AddWishIntent.KindChanged -> setState {
                 copy(isNeed = intent.isNeed, reasons = reasonsAfterSwitch(reasons, intent.isNeed), needReasonError = false)
@@ -97,6 +98,9 @@ class AddWishViewModel(
             AddWishIntent.BackToForm -> setState { copy(step = AddStep.FORM) }
             is AddWishIntent.AdjustDays -> setState {
                 copy(chosenDays = (chosenDays + intent.delta).coerceIn(0, BuildVerdictUseCase.MAX_DAYS))
+            }
+            is AddWishIntent.SetDays -> setState {
+                copy(chosenDays = intent.value.coerceIn(0, BuildVerdictUseCase.MAX_DAYS))
             }
             AddWishIntent.StartCooldown -> save(CreateOutcome.COOLDOWN)
             AddWishIntent.BuyNowRequested -> {
@@ -167,7 +171,8 @@ class AddWishViewModel(
             setState { copy(nameError = nameError, priceError = priceError, needReasonError = needReasonError) }
             return
         }
-        val impact = calculateImpact(price!!, s.profile)
+        val deliveryFee = Fmt.parseAmount(s.deliveryFee) ?: 0.0
+        val impact = calculateImpact(price!! + deliveryFee, s.profile)
         val history = learnFromHistory(pastWishes, s.category)
         val verdict = buildVerdict(
             impact = impact,
@@ -199,6 +204,7 @@ class AddWishViewModel(
                 hoursAtCreation = s.profile.hoursPerMonth,
                 link = s.link,
                 store = s.store,
+                deliveryFee = Fmt.parseAmount(s.deliveryFee) ?: 0.0,
             )
             // "Buy now" keeps the recommended cooldown on record so it's honestly tracked as early.
             val days = when (outcome) {

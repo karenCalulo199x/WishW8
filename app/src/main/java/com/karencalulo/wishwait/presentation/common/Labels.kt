@@ -91,6 +91,9 @@ val Achievement.titleRes: Int
         Achievement.DEBT_FREE -> R.string.ach_debt_free
         Achievement.GOAL_GETTER -> R.string.ach_goal_getter
         Achievement.OLLIE_FRIEND -> R.string.ach_ollie_friend
+        Achievement.EARLY_SAVER -> R.string.ach_early_saver
+        Achievement.TEN_RECONSIDERED -> R.string.ach_ten_reconsidered
+        Achievement.WEEK_STREAK -> R.string.ach_week_streak
     }
 
 @get:StringRes
@@ -108,6 +111,9 @@ val Achievement.descriptionRes: Int
         Achievement.DEBT_FREE -> R.string.ach_debt_free_desc
         Achievement.GOAL_GETTER -> R.string.ach_goal_getter_desc
         Achievement.OLLIE_FRIEND -> R.string.ach_ollie_friend_desc
+        Achievement.EARLY_SAVER -> R.string.ach_early_saver_desc
+        Achievement.TEN_RECONSIDERED -> R.string.ach_ten_reconsidered_desc
+        Achievement.WEEK_STREAK -> R.string.ach_week_streak_desc
     }
 
 @get:StringRes

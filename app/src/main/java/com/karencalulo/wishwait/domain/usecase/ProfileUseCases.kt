@@ -51,6 +51,7 @@ class ChangeCurrencyUseCase(
                     currencyCode = newCode,
                     monthlyIncome = it.monthlyIncome * rate,
                     monthlySavings = it.monthlySavings * rate,
+                    monthlyBills = it.monthlyBills * rate,
                 )
             }
         } else {

@@ -52,6 +52,7 @@ internal object WishJsonMapper {
         w.hoursAtCreation?.let { put("hoursAt", it) }
         w.link?.let { put("link", it) }
         w.store?.let { put("store", it) }
+        if (w.deliveryFee > 0) put("deliveryFee", w.deliveryFee)
         w.payment?.let { p ->
             put(
                 "payment",
@@ -90,6 +91,7 @@ internal object WishJsonMapper {
         hoursAtCreation = if (o.has("hoursAt")) o.getInt("hoursAt") else null,
         link = o.optString("link").takeIf { it.isNotBlank() },
         store = o.optString("store").takeIf { it.isNotBlank() },
+        deliveryFee = o.optDouble("deliveryFee", 0.0),
         payment = o.optJSONObject("payment")?.let { p ->
             PaymentPlan(
                 months = p.getInt("months"),

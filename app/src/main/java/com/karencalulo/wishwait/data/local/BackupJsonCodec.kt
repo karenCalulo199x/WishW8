@@ -20,6 +20,7 @@ class BackupJsonCodec : BackupCodec {
                     .put("income", p.monthlyIncome)
                     .put("hours", p.hoursPerMonth)
                     .put("savings", p.monthlySavings)
+                    .put("bills", p.monthlyBills)
                     .put("currency", p.currencyCode)
                     .put("strictness", p.strictness.name)
                     .put("reminders", p.remindersEnabled)
@@ -44,6 +45,7 @@ class BackupJsonCodec : BackupCodec {
                 monthlyIncome = p.optDouble("income", 0.0),
                 hoursPerMonth = p.optInt("hours", UserProfile.DEFAULT_HOURS_PER_MONTH),
                 monthlySavings = p.optDouble("savings", 0.0),
+                monthlyBills = p.optDouble("bills", 0.0),
                 currencyCode = p.optString("currency", "USD"),
                 strictness = Strictness.entries.firstOrNull { it.name == p.optString("strictness") } ?: Strictness.BALANCED,
                 onboarded = true,

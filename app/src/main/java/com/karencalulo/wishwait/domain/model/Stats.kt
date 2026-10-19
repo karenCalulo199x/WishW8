@@ -13,6 +13,9 @@ enum class Achievement(val emoji: String) {
     PAID_FOR_ITSELF("💯"),
     DEBT_FREE("🎊"),
     GOAL_GETTER("🎯"),
+    EARLY_SAVER("🌱"),
+    TEN_RECONSIDERED("🔟"),
+    WEEK_STREAK("🔥"),
 
     /** Sent Ollie a thank-you tip. Hidden until earned, so it never nudges anyone to pay. */
     OLLIE_FRIEND("🦉"),

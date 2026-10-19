@@ -29,6 +29,7 @@ data class WishDraft(
     val hoursAtCreation: Int? = null,
     val link: String? = null,
     val store: String? = null,
+    val deliveryFee: Double = 0.0,
 )
 
 enum class CreateOutcome { COOLDOWN, BUY_NOW, LET_GO }
@@ -83,6 +84,7 @@ class CreateWishUseCase(
             hoursAtCreation = draft.hoursAtCreation,
             link = draft.link,
             store = draft.store,
+            deliveryFee = draft.deliveryFee,
         )
         repo.upsert(wish)
         // Waiting → cooldown nudges; bought → the 14-day "still happy?" check.
@@ -202,7 +204,7 @@ class EditWishUseCase(
     private val repo: WishRepository,
     private val scheduler: ReminderScheduler,
 ) {
-    /** [reasons] null = keep them. Changing need vs. want doesn't touch the countdown. */
+    /** [reasons] null = keep them. [deliveryFee] null = keep it. Changing need vs. want doesn't touch the countdown. */
     suspend operator fun invoke(
         id: String,
         name: String,
@@ -210,6 +212,7 @@ class EditWishUseCase(
         category: Category,
         note: String,
         reasons: Set<com.karencalulo.wishwait.domain.model.Reason>? = null,
+        deliveryFee: Double? = null,
     ) {
         val wish = repo.getWish(id) ?: return
         if (name.isBlank() || price <= 0) return
@@ -220,6 +223,7 @@ class EditWishUseCase(
             category = category,
             note = note.trim(),
             reasons = reasons ?: wish.reasons,
+            deliveryFee = deliveryFee ?: wish.deliveryFee,
             // An installment follows the price it was set up for.
             payment = wish.payment?.let { it.copy(monthlyPayment = it.monthlyPayment * scale) },
         )

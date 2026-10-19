@@ -35,6 +35,7 @@ data class SettingsState(
     val income: String = "",
     val hours: String = "",
     val savings: String = "",
+    val bills: String = "",
     val currencyCode: String = "USD",
     val strictness: Strictness = Strictness.BALANCED,
     val remindersEnabled: Boolean = true,
@@ -69,6 +70,7 @@ sealed interface SettingsIntent {
     data class IncomeChanged(val value: String) : SettingsIntent
     data class HoursChanged(val value: String) : SettingsIntent
     data class SavingsChanged(val value: String) : SettingsIntent
+    data class BillsChanged(val value: String) : SettingsIntent
     data object SaveMoney : SettingsIntent
     data class StrictnessSelected(val value: Strictness) : SettingsIntent
     data class RemindersToggled(val value: Boolean) : SettingsIntent
@@ -147,6 +149,7 @@ class SettingsViewModel(
             income = Fmt.plain(p.monthlyIncome),
             hours = p.hoursPerMonth.toString(),
             savings = Fmt.plain(p.monthlySavings),
+            bills = Fmt.plain(p.monthlyBills),
             currencyCode = p.currencyCode,
             strictness = p.strictness,
             remindersEnabled = p.remindersEnabled,
@@ -162,6 +165,7 @@ class SettingsViewModel(
             is SettingsIntent.IncomeChanged -> setState { copy(income = Fmt.sanitizeAmount(intent.value), dirty = true) }
             is SettingsIntent.HoursChanged -> setState { copy(hours = intent.value.filter { it.isDigit() }.take(3), dirty = true) }
             is SettingsIntent.SavingsChanged -> setState { copy(savings = Fmt.sanitizeAmount(intent.value), dirty = true) }
+            is SettingsIntent.BillsChanged -> setState { copy(bills = Fmt.sanitizeAmount(intent.value), dirty = true) }
             SettingsIntent.SaveMoney -> {
                 val s = currentState
                 viewModelScope.launch {
@@ -170,6 +174,7 @@ class SettingsViewModel(
                             monthlyIncome = Fmt.parseAmount(s.income) ?: it.monthlyIncome,
                             hoursPerMonth = s.hours.toIntOrNull()?.takeIf { h -> h > 0 } ?: it.hoursPerMonth,
                             monthlySavings = Fmt.parseAmount(s.savings) ?: 0.0,
+                            monthlyBills = Fmt.parseAmount(s.bills) ?: 0.0,
                         )
                     }
                     setState { copy(dirty = false) }
