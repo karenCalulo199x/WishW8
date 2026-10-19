@@ -313,6 +313,8 @@
     <string name="verdict_stat_afford">to afford</string>
     <string name="verdict_cooldown">Cooldown</string>
     <string name="cd_fewer_days">Fewer days</string>
+    <string name="cd_previous_month">Previous month</string>
+    <string name="cd_next_month">Next month</string>
     <string name="cd_more_days">More days</string>
     <string name="verdict_no_wait_sub">Tiny, calm, and needed? Go ahead and enjoy it.</string>
     <string name="verdict_shorter_sub">I suggested %1$s — but you\'re the boss. Decide on %2$s.</string>
@@ -520,7 +522,7 @@
     <string name="wins_line">%1$d of %2$d decisions made with a clear head. Keep it up!</string>
     <string name="wins_goal_progress">%1$s Saving for %2$s</string>
     <string name="wins_streak">day streak</string>
-    <string name="wins_calendar">Last 30 days</string>
+    <string name="wins_calendar">Activity calendar</string>
     <string name="wins_calendar_active">Mindful decision</string>
     <string name="wins_calendar_missed">Impulse buy</string>
     <string name="wins_calendar_none">No activity</string>

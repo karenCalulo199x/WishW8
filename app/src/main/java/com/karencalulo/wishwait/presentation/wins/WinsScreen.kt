@@ -27,9 +27,14 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.rounded.ArrowBack
+import androidx.compose.material.icons.automirrored.rounded.ArrowForward
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -63,12 +68,12 @@ import java.util.Calendar
 fun WinsRoute(onOpenWish: (String) -> Unit) {
     val vm = appViewModel { WinsViewModel(it.observeStats, it.observeWishes, it.observeGoal) }
     val state by vm.state.collectAsStateWithLifecycle()
-    WinsScreen(state, onOpenWish)
+    WinsScreen(state, onOpenWish, vm::onIntent)
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun WinsScreen(state: WinsState, onOpenWish: (String) -> Unit) {
+fun WinsScreen(state: WinsState, onOpenWish: (String) -> Unit, onIntent: (WinsIntent) -> Unit = {}) {
     val money = LocalMoney.current
     val stats = state.stats
     Scaffold(topBar = { TopAppBar(title = { Text(stringResource(R.string.wins_title)) }) }) { padding ->
@@ -152,7 +157,15 @@ fun WinsScreen(state: WinsState, onOpenWish: (String) -> Unit) {
 
             if (state.calendar.isNotEmpty()) {
                 item { SectionTitle(stringResource(R.string.wins_calendar)) }
-                item { ActivityCalendarGrid(state.calendar) }
+                item {
+                    ActivityCalendarGrid(
+                        days = state.calendar,
+                        month = state.calendarMonth,
+                        canGoNext = state.canGoToNextMonth,
+                        onPrevMonth = { onIntent(WinsIntent.PrevMonth) },
+                        onNextMonth = { onIntent(WinsIntent.NextMonth) },
+                    )
+                }
             }
 
             if (state.decided.isNotEmpty()) {
@@ -195,13 +208,30 @@ private fun HeroStat(emoji: String, value: String, label: String, modifier: Modi
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
-private fun ActivityCalendarGrid(days: List<DayCell>) {
+private fun ActivityCalendarGrid(
+    days: List<DayCell>,
+    month: YearMonth,
+    canGoNext: Boolean,
+    onPrevMonth: () -> Unit,
+    onNextMonth: () -> Unit,
+) {
     if (days.isEmpty()) return
     Column {
-        calendarRangeLabel(days)?.let {
-            Text(it, style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
-            Spacer(Modifier.height(8.dp))
+        Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxWidth()) {
+            IconButton(onClick = onPrevMonth) {
+                Icon(Icons.AutoMirrored.Rounded.ArrowBack, contentDescription = stringResource(R.string.cd_previous_month))
+            }
+            Text(
+                monthLabel(month),
+                style = MaterialTheme.typography.titleSmall,
+                modifier = Modifier.weight(1f),
+                textAlign = TextAlign.Center,
+            )
+            IconButton(onClick = onNextMonth, enabled = canGoNext) {
+                Icon(Icons.AutoMirrored.Rounded.ArrowForward, contentDescription = stringResource(R.string.cd_next_month))
+            }
         }
+        Spacer(Modifier.height(4.dp))
         Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
             mondayStartWeekdayLabels().forEach { label ->
                 Text(
@@ -243,6 +273,7 @@ private fun DayDot(cell: DayCell, modifier: Modifier = Modifier) {
         DayStatus.MINDFUL -> MaterialTheme.colorScheme.tertiaryContainer
         DayStatus.MISSED -> MaterialTheme.colorScheme.errorContainer
         DayStatus.NONE -> MaterialTheme.colorScheme.surfaceContainerHigh
+        DayStatus.FUTURE -> MaterialTheme.colorScheme.surface
     }
     val day = remember(cell.dayStart) {
         Calendar.getInstance().apply { timeInMillis = cell.dayStart }.get(Calendar.DAY_OF_MONTH)
@@ -258,7 +289,8 @@ private fun DayDot(cell: DayCell, modifier: Modifier = Modifier) {
                 } else {
                     Modifier
                 },
-            ),
+            )
+            .alpha(if (cell.status == DayStatus.FUTURE) 0.5f else 1f),
         contentAlignment = Alignment.Center,
     ) {
         if (cell.emoji != null) {
