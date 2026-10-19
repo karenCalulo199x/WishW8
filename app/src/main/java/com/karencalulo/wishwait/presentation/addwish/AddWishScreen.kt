@@ -22,11 +22,11 @@ import androidx.activity.compose.BackHandler
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.AnimatedContent
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
-import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -51,8 +51,6 @@ import androidx.compose.material.icons.automirrored.rounded.ArrowBack
 import androidx.compose.material.icons.rounded.Add
 import androidx.compose.material.icons.rounded.Calculate
 import androidx.compose.material.icons.rounded.Close
-import androidx.compose.material.icons.rounded.ExpandLess
-import androidx.compose.material.icons.rounded.ExpandMore
 import androidx.compose.material.icons.rounded.Remove
 import androidx.compose.material.icons.rounded.TipsAndUpdates
 import androidx.compose.material3.AlertDialog
@@ -102,10 +100,17 @@ import com.karencalulo.wishwait.presentation.components.DesireSlider
 import com.karencalulo.wishwait.presentation.components.NeedWantPicker
 import androidx.compose.foundation.relocation.BringIntoViewRequester
 import androidx.compose.foundation.relocation.bringIntoViewRequester
+import androidx.compose.material3.ButtonColors
+import androidx.compose.material3.ButtonDefaults
 import com.karencalulo.wishwait.presentation.components.FriendBubble
 import com.karencalulo.wishwait.presentation.components.ImpactMeter
 import com.karencalulo.wishwait.presentation.components.MoneyField
 import com.karencalulo.wishwait.presentation.components.StatTile
+import androidx.compose.ui.tooling.preview.Preview
+import com.karencalulo.wishwait.domain.model.PriceImpact
+import com.karencalulo.wishwait.domain.model.Affordability
+import com.karencalulo.wishwait.domain.model.UserProfile
+import com.karencalulo.wishwait.presentation.theme.WishWaitTheme
 
 @Composable
 fun AddWishRoute(
@@ -219,7 +224,17 @@ fun AddWishScreen(
         ) { padding ->
             AnimatedContent(
                 targetState = state.step,
-                transitionSpec = { (fadeIn() + slideInVertically { it / 6 }) togetherWith fadeOut() },
+                transitionSpec = {
+                    if (targetState.ordinal > initialState.ordinal) {
+                        // Moving forward: new step slides in from the right, old one exits left.
+                        (slideInHorizontally { width -> width } + fadeIn()) togetherWith
+                            (slideOutHorizontally { width -> -width } + fadeOut())
+                    } else {
+                        // Going back: new step slides in from the left, old one exits right.
+                        (slideInHorizontally { width -> -width } + fadeIn()) togetherWith
+                            (slideOutHorizontally { width -> width } + fadeOut())
+                    }
+                },
                 label = "step",
                 modifier = Modifier.padding(padding),
             ) { step ->
@@ -302,7 +317,7 @@ fun AddWishScreen(
 @Composable
 private fun StepBottomBar(buttonLabel: String, subLabel: String?, onClick: () -> Unit) {
     Surface(color = MaterialTheme.colorScheme.surface) {
-        Column(Modifier.padding(horizontal = 16.dp, vertical = 12.dp)) {
+        Column(Modifier.padding(start = 16.dp, end = 16.dp, top = 12.dp, bottom = 24.dp)) {
             Button(
                 onClick = onClick,
                 modifier = Modifier
@@ -339,10 +354,10 @@ private fun onStartCooldownAfterDismiss(
 private fun WishBasicsStep(state: AddWishState, onIntent: (AddWishIntent) -> Unit) {
     if (state.fromShare) {
         SharedBanner(state)
-        Spacer(Modifier.height(16.dp))
+        Spacer(Modifier.height(20.dp))
     } else {
         PasteLinkRow(state, onIntent)
-        Spacer(Modifier.height(16.dp))
+        Spacer(Modifier.height(20.dp))
     }
     Text(stringResource(R.string.add_question), style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold)
     Text(
@@ -454,13 +469,14 @@ private fun WishReflectStep(state: AddWishState, onIntent: (AddWishIntent) -> Un
         if (state.needReasonError) runCatching { kindBringIntoView.bringIntoView() }
     }
 
-    Text(stringResource(R.string.add_reflect_title), style = MaterialTheme.typography.headlineSmall)
+    Spacer(Modifier.height(12.dp))
+    Text(stringResource(R.string.add_reflect_title), style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.Bold)
     Text(
         stringResource(R.string.add_reflect_sub),
         style = MaterialTheme.typography.bodyMedium,
         color = MaterialTheme.colorScheme.onSurfaceVariant,
     )
-    Spacer(Modifier.height(16.dp))
+    Spacer(Modifier.height(12.dp))
 
     NeedWantPicker(
         isNeed = state.isNeed,
@@ -471,41 +487,38 @@ private fun WishReflectStep(state: AddWishState, onIntent: (AddWishIntent) -> Un
         modifier = Modifier.bringIntoViewRequester(kindBringIntoView),
     )
 
-    Spacer(Modifier.height(16.dp))
-    TextButton(onClick = { onIntent(AddWishIntent.ToggleDetails) }) {
-        Text(stringResource(if (state.detailsExpanded) R.string.add_details_hide else R.string.add_details_show))
-        Icon(
-            if (state.detailsExpanded) Icons.Rounded.ExpandLess else Icons.Rounded.ExpandMore,
-            contentDescription = null,
-        )
-    }
+    FormLabel(stringResource(R.string.field_note))
+    OutlinedTextField(
+        value = state.note,
+        onValueChange = { onIntent(AddWishIntent.NoteChanged(it)) },
+        placeholder = { Text(stringResource(R.string.field_note_placeholder)) },
+        minLines = 2,
+        maxLines = 4,
+        modifier = Modifier.fillMaxWidth(),
+    )
+    Surface(
+        shape = MaterialTheme.shapes.medium,
+        color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.4f),
+        modifier = Modifier.fillMaxWidth().padding(vertical = 12.dp),
+    ) {
+        Column(modifier = Modifier.padding(16.dp)) {
+            FormLabel(stringResource(R.string.add_desire), stringResource(R.string.add_desire_sub))
+            DesireSlider(
+                selected = state.desire,
+                onSelect = { onIntent(AddWishIntent.DesireChanged(it)) })
 
-    AnimatedVisibility(visible = state.detailsExpanded) {
-        Column {
-            OutlinedTextField(
-                value = state.note,
-                onValueChange = { onIntent(AddWishIntent.NoteChanged(it)) },
-                label = { Text(stringResource(R.string.field_note)) },
-                placeholder = { Text(stringResource(R.string.field_note_placeholder)) },
-                minLines = 2,
-                maxLines = 4,
-                modifier = Modifier.fillMaxWidth(),
-            )
         }
     }
-
-    FormLabel(stringResource(R.string.add_desire), stringResource(R.string.add_desire_sub))
-    DesireSlider(selected = state.desire, onSelect = { onIntent(AddWishIntent.DesireChanged(it)) })
 }
 
 @Composable
 private fun FormLabel(title: String, subtitle: String? = null) {
-    Spacer(Modifier.height(20.dp))
+    Spacer(Modifier.height(12.dp))
     Text(title, style = MaterialTheme.typography.titleMedium)
     if (subtitle != null) {
         Text(subtitle, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
     }
-    Spacer(Modifier.height(8.dp))
+    Spacer(Modifier.height(12.dp))
 }
 
 @Composable
@@ -627,12 +640,12 @@ private fun VerdictContent(
     // Cooldown picker
     Spacer(Modifier.height(20.dp))
     Card(
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.4f)),
         modifier = Modifier.fillMaxWidth(),
     ) {
-        Column(Modifier.padding(20.dp), horizontalAlignment = Alignment.CenterHorizontally) {
+        Column(Modifier.padding(16.dp).fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
             Text(stringResource(R.string.verdict_cooldown), style = MaterialTheme.typography.labelLarge)
-            Row(verticalAlignment = Alignment.CenterVertically) {
+            Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Center) {
                 FilledTonalIconButton(
                     onClick = { onIntent(AddWishIntent.AdjustDays(-1)) },
                     enabled = state.chosenDays > 0,
@@ -787,26 +800,105 @@ private fun SharedBanner(state: AddWishState) {
 @Composable
 private fun PasteLinkRow(state: AddWishState, onIntent: (AddWishIntent) -> Unit) {
     val context = LocalContext.current
-    Column {
-        OutlinedButton(
-            onClick = {
-                val clipboard = context.getSystemService(ClipboardManager::class.java)
-                val text = runCatching {
-                    clipboard?.primaryClip?.takeIf { it.itemCount > 0 }?.getItemAt(0)?.coerceToText(context)?.toString()
-                }.getOrNull()
-                onIntent(AddWishIntent.PasteLink(text))
-            },
-            modifier = Modifier.fillMaxWidth(),
-        ) {
-            Icon(Icons.Rounded.ContentPaste, contentDescription = null)
-            Spacer(Modifier.width(8.dp))
-            Text(stringResource(R.string.paste_link))
+    Surface(
+        shape = MaterialTheme.shapes.medium,
+        color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.4f),
+        modifier = Modifier.fillMaxWidth(),
+    ) {
+        Column(Modifier.padding(16.dp)) {
+            OutlinedButton(
+                onClick = {
+                    val clipboard = context.getSystemService(ClipboardManager::class.java)
+                    val text = runCatching {
+                        clipboard?.primaryClip?.takeIf { it.itemCount > 0 }?.getItemAt(0)?.coerceToText(context)?.toString()
+                    }.getOrNull()
+                    onIntent(AddWishIntent.PasteLink(text))
+                },
+                modifier = Modifier.fillMaxWidth(),
+            ) {
+                Icon(Icons.Rounded.ContentPaste, contentDescription = null)
+                Spacer(Modifier.width(8.dp))
+                Text(stringResource(R.string.paste_link))
+            }
+            Text(
+                stringResource(if (state.pasteFailed) R.string.paste_none else R.string.paste_link_hint),
+                style = MaterialTheme.typography.bodySmall,
+                color = if (state.pasteFailed) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.onSurfaceVariant,
+                modifier = Modifier.padding(top = 4.dp),
+            )
         }
-        Text(
-            stringResource(if (state.pasteFailed) R.string.paste_none else R.string.paste_link_hint),
-            style = MaterialTheme.typography.bodySmall,
-            color = if (state.pasteFailed) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.onSurfaceVariant,
-            modifier = Modifier.padding(top = 4.dp),
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun AddWishBasicsPreview() {
+    WishWaitTheme {
+        AddWishScreen(
+            state = AddWishState(
+                step = AddStep.BASICS,
+                name = "Mechanical Keyboard",
+                price = "120"
+            ),
+            onIntent = {},
+            onClose = {},
+            onStartCooldown = {}
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun AddWishReflectPreview() {
+    WishWaitTheme {
+        AddWishScreen(
+            state = AddWishState(
+                step = AddStep.REFLECT,
+                name = "Mechanical Keyboard",
+                price = "120",
+                category = Category.GADGETS
+            ),
+            onIntent = {},
+            onClose = {},
+            onStartCooldown = {}
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun AddWishVerdictPreview() {
+    val impact = PriceImpact(
+        price = 120.0,
+        incomeRatio = 0.04,
+        workHours = 6.4,
+        workDays = 0.8,
+        monthsToSave = null,
+        tier = Tier.SMALL,
+        affordability = Affordability.EASY
+    )
+    val verdict = Verdict(
+        impact = impact,
+        recommendedDays = 3,
+        isNeed = false,
+        riskyMoods = emptyList(),
+        onSale = false,
+        socialPressure = false,
+        extraDaysForMood = 0
+    )
+    WishWaitTheme {
+        AddWishScreen(
+            state = AddWishState(
+                step = AddStep.VERDICT,
+                name = "Mechanical Keyboard",
+                price = "120",
+                category = Category.GADGETS,
+                verdict = verdict,
+                profile = UserProfile(monthlyIncome = 3000.0, hoursPerMonth = 160)
+            ),
+            onIntent = {},
+            onClose = {},
+            onStartCooldown = {}
         )
     }
 }

@@ -22,7 +22,6 @@ data class AddWishState(
     val moods: Set<Mood> = emptySet(),
     val note: String = "",
     val desire: Int = 4,
-    val detailsExpanded: Boolean = false,
     val nameError: Boolean = false,
     val priceError: Boolean = false,
     val profile: UserProfile = UserProfile(),
@@ -59,7 +58,6 @@ sealed interface AddWishIntent {
     data class NoteChanged(val value: String) : AddWishIntent
     data class DesireChanged(val value: Int) : AddWishIntent
     data object AskFriend : AddWishIntent
-    data object ToggleDetails : AddWishIntent
     data object ContinueToReflect : AddWishIntent
     data object Back : AddWishIntent
     data class AdjustDays(val delta: Int) : AddWishIntent

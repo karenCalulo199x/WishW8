@@ -142,20 +142,20 @@
     <string name="desire_insight_steady">Your desire is holding steady. Keep checking in.</string>
 
     <!-- ===== Ollie: verdict ===== -->
-    <string name="headline_treat">Small treat. You\'ve got this.</string>
-    <string name="headline_small">Not bad — but let\'s sleep on it.</string>
-    <string name="headline_medium">Hmm, that\'s a real chunk of your pay.</string>
-    <string name="headline_large">Whoa, that\'s a big bite of your paycheck.</string>
-    <string name="headline_big">That\'s almost a whole paycheck!</string>
-    <string name="headline_huge">Hold up. That\'s months of work.</string>
-    <string name="headline_massive">Okay friend, deep breath.</string>
+    <string name="headline_treat">A little treat? I like it.</string>
+    <string name="headline_small">Cute — but let\'s sit with it a bit.</string>
+    <string name="headline_medium">Ooh, that\'s a decent chunk of your pay.</string>
+    <string name="headline_large">Whew, that\'s a big bite of your paycheck.</string>
+    <string name="headline_big">That\'s basically a whole paycheck, friend.</string>
+    <string name="headline_huge">Whoa, hold up — that\'s months of work.</string>
+    <string name="headline_massive">Okay, deep breath with me.</string>
     <string name="verdict_this">This</string>
-    <string name="msg_treat">%1$s is %2$s of your monthly income — about %3$s of work. Small joys matter. Just make sure it\'s a joy, not a reflex.</string>
-    <string name="msg_small">%1$s costs %3$s of your work time. Not huge, but small buys add up fast. If you still want it after a short wait, enjoy it guilt-free.</string>
-    <string name="msg_medium">%1$s is %2$s of what you earn in a month. That\'s %3$s of your life at work. A week of waiting will tell you if this is love or just a crush.</string>
-    <string name="msg_large">%1$s eats %2$s of your monthly income — %3$s of work. Let\'s give it a couple of weeks. Real wants survive; impulses fade.</string>
-    <string name="msg_big">%1$s is %2$s of a month\'s pay. You\'d trade %3$s of your life for it. Worth it? Maybe! Let\'s find out by waiting.</string>
-    <string name="msg_huge">%1$s costs %2$s your monthly income. That\'s %3$s of work — real weeks of your life. If you still want it after the cooldown, it\'s a real want, not a mood.</string>
+    <string name="msg_treat">Hey, %1$s runs about %2$s of what you make a month — roughly %3$s of work. Small joys are allowed! Just make sure it\'s a joy you actually want, not a reflex.</string>
+    <string name="msg_small">%1$s would cost you %3$s of your time at work. Not huge on its own, but these little buys sneak up on you. If you still want it after a short wait, go for it — guilt-free.</string>
+    <string name="msg_medium">So %1$s is %2$s of your monthly income — that\'s %3$s of your life at work for it. Let\'s give it a week. If it\'s real, it\'ll still feel right then.</string>
+    <string name="msg_large">Okay, %1$s eats up %2$s of your month\'s income — %3$s of work. Let\'s sit on this one for a couple weeks. Real wants stick around; impulses fade.</string>
+    <string name="msg_big">%1$s is %2$s of a whole month\'s pay. That\'s %3$s of your life you\'d be trading for it. Could be worth it! Let\'s find out together by waiting first.</string>
+    <string name="msg_huge">%1$s costs %2$s of your monthly income — %3$s of real weeks at work. If you still want it after the cooldown, that\'s a genuine want talking, not just a mood.</string>
     <string name="msg_moods">You said you\'re feeling %1$s. Those feelings love to shop, so I added %2$s to the wait.</string>
     <string name="msg_high_desire">You really want this one. That strong a pull is worth double-checking, so I added %1$s to the wait.</string>
     <string name="msg_sale">About the sale: it\'s designed to rush you. Would you still want it at full price? There\'s always another sale.</string>

@@ -3,7 +3,11 @@ package com.karencalulo.wishwait.presentation.components
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.RepeatMode
+import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.infiniteRepeatable
+import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.slideInVertically
@@ -18,6 +22,7 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -34,6 +39,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -71,6 +77,7 @@ import androidx.compose.ui.semantics.progressBarRangeInfo
 import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.semantics
 import com.karencalulo.wishwait.presentation.common.LocalMoney
+import kotlinx.coroutines.delay
 import kotlin.math.PI
 import kotlin.math.roundToInt
 import kotlin.math.sin
@@ -138,7 +145,7 @@ fun FriendBubble(
                     Text(headline, style = MaterialTheme.typography.titleMedium)
                     if (message.isNotBlank()) {
                         Spacer(Modifier.height(8.dp))
-                        Text(
+                        TypingMessage(
                             message,
                             style = MaterialTheme.typography.bodyMedium,
                             color = MaterialTheme.colorScheme.onSurfaceVariant,
@@ -146,6 +153,64 @@ fun FriendBubble(
                     }
                 }
             }
+        }
+    }
+}
+
+/** Ollie's reply: a brief "typing…" beat, then the message types itself out like a live chat. */
+@Composable
+private fun TypingMessage(
+    message: String,
+    style: TextStyle,
+    color: Color,
+    modifier: Modifier = Modifier,
+) {
+    var phase by remember(message) { mutableStateOf(TypingPhase.THINKING) }
+    var visibleChars by remember(message) { mutableIntStateOf(0) }
+    LaunchedEffect(message) {
+        phase = TypingPhase.THINKING
+        visibleChars = 0
+        delay(500)
+        phase = TypingPhase.TYPING
+        // Always ~50 reveal steps regardless of length, so short and long replies feel equally snappy.
+        val charsPerTick = (message.length / 50).coerceAtLeast(1)
+        while (visibleChars < message.length) {
+            delay(16)
+            visibleChars = (visibleChars + charsPerTick).coerceAtMost(message.length)
+        }
+        phase = TypingPhase.DONE
+    }
+    if (phase == TypingPhase.THINKING) {
+        TypingDots(modifier)
+    } else {
+        Text(message.substring(0, visibleChars), style = style, color = color, modifier = modifier)
+    }
+}
+
+private enum class TypingPhase { THINKING, TYPING, DONE }
+
+/** Three bouncing dots, like a chat app's "is typing…" indicator. */
+@Composable
+private fun TypingDots(modifier: Modifier = Modifier) {
+    val transition = rememberInfiniteTransition(label = "typing")
+    Row(modifier, horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+        repeat(3) { i ->
+            val offsetY by transition.animateFloat(
+                initialValue = 0f,
+                targetValue = -6f,
+                animationSpec = infiniteRepeatable(
+                    animation = tween(300, delayMillis = i * 120, easing = LinearEasing),
+                    repeatMode = RepeatMode.Reverse,
+                ),
+                label = "dot$i",
+            )
+            Box(
+                Modifier
+                    .offset(y = offsetY.dp)
+                    .size(8.dp)
+                    .clip(CircleShape)
+                    .background(MaterialTheme.colorScheme.onSurfaceVariant),
+            )
         }
     }
 }

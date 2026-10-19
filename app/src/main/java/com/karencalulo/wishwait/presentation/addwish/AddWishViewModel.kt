@@ -88,19 +88,17 @@ class AddWishViewModel(
                 copy(isNeed = intent.isNeed, reasons = reasonsAfterSwitch(reasons, intent.isNeed), needReasonError = false)
             }
             is AddWishIntent.ReasonToggled -> setState {
-                // Only reasons that match the current choice can be picked. Single-select: tapping
-                // the selected reason again clears it, tapping another replaces the pick.
+                // Only reasons that match the current choice can be picked.
                 if (intent.value.isNeed != isNeed) {
                     this
                 } else {
-                    val newReasons = if (reasons == setOf(intent.value)) emptySet() else setOf(intent.value)
+                    val newReasons = if (intent.value in reasons) reasons - intent.value else reasons + intent.value
                     copy(reasons = newReasons, needReasonError = false)
                 }
             }
             is AddWishIntent.NoteChanged -> setState { copy(note = intent.value.take(280)) }
             is AddWishIntent.DesireChanged -> setState { copy(desire = intent.value) }
             AddWishIntent.AskFriend -> askFriend()
-            AddWishIntent.ToggleDetails -> setState { copy(detailsExpanded = !detailsExpanded) }
             AddWishIntent.ContinueToReflect -> continueToReflect()
             AddWishIntent.Back -> setState {
                 copy(
