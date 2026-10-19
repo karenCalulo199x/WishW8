@@ -12,7 +12,7 @@ import java.util.Locale
 enum class DayStatus { NONE, MINDFUL, MISSED }
 
 /** [emoji] is the category emoji of the mindful decision that day, when there is one. */
-data class DayCell(val dayStart: Long, val status: DayStatus, val emoji: String? = null)
+data class DayCell(val dayStart: Long, val status: DayStatus, val emoji: String? = null, val isToday: Boolean = false)
 
 private const val CALENDAR_WINDOW_DAYS = 30
 private const val IMPULSE_EMOJI = "⚡"
@@ -40,10 +40,11 @@ fun buildActivityCalendar(wishes: List<Wish>, now: Long = System.currentTimeMill
         val decisions = byDay[day].orEmpty()
         val mindful = decisions.firstOrNull { it.boughtMindfully || it.status == WishStatus.LET_GO }
         val impulse = decisions.any { it.boughtEarly }
+        val isToday = day == today
         when {
-            mindful != null -> DayCell(day, DayStatus.MINDFUL, mindful.category.emoji)
-            impulse -> DayCell(day, DayStatus.MISSED, IMPULSE_EMOJI)
-            else -> DayCell(day, DayStatus.NONE)
+            mindful != null -> DayCell(day, DayStatus.MINDFUL, mindful.category.emoji, isToday)
+            impulse -> DayCell(day, DayStatus.MISSED, IMPULSE_EMOJI, isToday)
+            else -> DayCell(day, DayStatus.NONE, isToday = isToday)
         }
     }
 }

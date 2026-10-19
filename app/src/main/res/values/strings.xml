@@ -524,6 +524,7 @@
     <string name="wins_calendar_active">Mindful decision</string>
     <string name="wins_calendar_missed">Impulse buy</string>
     <string name="wins_calendar_none">No activity</string>
+    <string name="wins_calendar_today">Today</string>
     <string name="wins_let_go">let go</string>
     <string name="wins_mindful">mindful buys</string>
     <string name="wins_early">early buys</string>

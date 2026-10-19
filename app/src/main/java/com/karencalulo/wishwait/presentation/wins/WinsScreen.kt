@@ -8,9 +8,12 @@ import com.karencalulo.wishwait.presentation.common.res
 import com.karencalulo.wishwait.R
 import androidx.compose.ui.res.stringResource
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -41,6 +44,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -189,6 +193,7 @@ private fun HeroStat(emoji: String, value: String, label: String, modifier: Modi
     }
 }
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 private fun ActivityCalendarGrid(days: List<DayCell>) {
     if (days.isEmpty()) return
@@ -219,10 +224,15 @@ private fun ActivityCalendarGrid(days: List<DayCell>) {
             }
         }
         Spacer(Modifier.height(8.dp))
-        Row(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
+        FlowRow(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
             LegendDot(MaterialTheme.colorScheme.tertiaryContainer, stringResource(R.string.wins_calendar_active))
             LegendDot(MaterialTheme.colorScheme.errorContainer, stringResource(R.string.wins_calendar_missed))
             LegendDot(MaterialTheme.colorScheme.surfaceContainerHigh, stringResource(R.string.wins_calendar_none))
+            LegendDot(
+                MaterialTheme.colorScheme.surfaceContainerHigh,
+                stringResource(R.string.wins_calendar_today),
+                borderColor = MaterialTheme.colorScheme.primary,
+            )
         }
     }
 }
@@ -241,25 +251,38 @@ private fun DayDot(cell: DayCell, modifier: Modifier = Modifier) {
         modifier = modifier
             .aspectRatio(1f)
             .clip(MaterialTheme.shapes.small)
-            .background(color),
+            .background(color)
+            .then(
+                if (cell.isToday) {
+                    Modifier.border(2.dp, MaterialTheme.colorScheme.primary, MaterialTheme.shapes.small)
+                } else {
+                    Modifier
+                },
+            ),
         contentAlignment = Alignment.Center,
     ) {
         if (cell.emoji != null) {
             Text(cell.emoji, style = MaterialTheme.typography.labelMedium)
         } else {
-            Text("$day", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            Text(
+                "$day",
+                style = MaterialTheme.typography.labelSmall,
+                color = if (cell.isToday) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant,
+                fontWeight = if (cell.isToday) FontWeight.Bold else null,
+            )
         }
     }
 }
 
 @Composable
-private fun LegendDot(color: Color, label: String) {
+private fun LegendDot(color: Color, label: String, borderColor: Color? = null) {
     Row(verticalAlignment = Alignment.CenterVertically) {
         Box(
             Modifier
                 .size(10.dp)
                 .clip(MaterialTheme.shapes.extraSmall)
-                .background(color),
+                .background(color)
+                .then(if (borderColor != null) Modifier.border(1.5.dp, borderColor, MaterialTheme.shapes.extraSmall) else Modifier),
         )
         Spacer(Modifier.width(6.dp))
         Text(label, style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
