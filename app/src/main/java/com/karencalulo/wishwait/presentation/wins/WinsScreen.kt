@@ -254,7 +254,7 @@ private fun Badge(a: Achievement, unlocked: Boolean, modifier: Modifier = Modifi
             Modifier
                 .fillMaxWidth()
                 .padding(14.dp)
-                .alpha(if (unlocked) 1f else 0.45f),
+                .alpha(if (unlocked) 1f else 0.62f),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Text(if (unlocked) a.emoji else "🔒", fontSize = 30.sp)

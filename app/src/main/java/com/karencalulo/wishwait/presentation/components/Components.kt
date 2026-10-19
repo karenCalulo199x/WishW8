@@ -283,10 +283,10 @@ fun StatTile(
         Column(Modifier.padding(horizontal = 14.dp, vertical = 12.dp)) {
             Text(emoji, fontSize = 20.sp, modifier = Modifier.clearAndSetSemantics { })
             Spacer(Modifier.height(6.dp))
-            Text(value, style = MaterialTheme.typography.titleMedium, maxLines = 1)
+            Text(value, style = MaterialTheme.typography.titleLarge, maxLines = 1)
             Text(
                 label,
-                style = MaterialTheme.typography.bodySmall,
+                style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 maxLines = 2,
             )

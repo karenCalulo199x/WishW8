@@ -13,6 +13,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.runtime.staticCompositionLocalOf
 import com.karencalulo.wishwait.domain.model.DAY_MS
 import com.karencalulo.wishwait.domain.model.HOUR_MS
+import com.karencalulo.wishwait.domain.model.deviceCurrencyCode
 import kotlinx.coroutines.delay
 import java.text.DateFormat
 import java.text.NumberFormat
@@ -42,7 +43,7 @@ class MoneyFormatter(currencyCode: String) {
     }
 }
 
-val LocalMoney = staticCompositionLocalOf { MoneyFormatter("USD") }
+val LocalMoney = staticCompositionLocalOf { MoneyFormatter(deviceCurrencyCode()) }
 
 object Fmt {
     private val number = NumberFormat.getNumberInstance(Locale.getDefault())

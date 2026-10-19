@@ -1,6 +1,12 @@
 package com.karencalulo.wishwait.domain.model
 
 import java.util.Calendar
+import java.util.Currency
+import java.util.Locale
+
+/** ISO currency code for the device's current locale (e.g. "PHP" in the Philippines), falling back to USD. */
+fun deviceCurrencyCode(): String =
+    runCatching { Currency.getInstance(Locale.getDefault()).currencyCode }.getOrNull() ?: "USD"
 
 const val DAY_MS = 86_400_000L
 const val HOUR_MS = 3_600_000L
@@ -176,7 +182,7 @@ data class UserProfile(
     val monthlySavings: Double = 0.0,
     /** Monthly bills/fixed expenses, used to work out what's actually free to spend. */
     val monthlyBills: Double = 0.0,
-    val currencyCode: String = "USD",
+    val currencyCode: String = deviceCurrencyCode(),
     val strictness: Strictness = Strictness.BALANCED,
     val onboarded: Boolean = false,
     val remindersEnabled: Boolean = true,

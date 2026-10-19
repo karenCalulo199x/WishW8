@@ -527,7 +527,7 @@
     <string name="wins_mindful">mindful buys</string>
     <string name="wins_early">early buys</string>
     <string name="wins_hours">of work kept</string>
-    <string name="wins_desire">avg. desire change while waiting</string>
+    <string name="wins_desire">change in buying urge</string>
     <string name="wins_loved">buys you love</string>
     <string name="wins_regretted">buys you regret</string>
     <string name="wins_badges">Badges · %1$d/%2$d</string>

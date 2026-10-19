@@ -11,6 +11,7 @@ import androidx.datastore.preferences.core.stringPreferencesKey
 import com.karencalulo.wishwait.domain.model.Strictness
 import com.karencalulo.wishwait.domain.model.DEFAULT_PAYDAY_SALES
 import com.karencalulo.wishwait.domain.model.UserProfile
+import com.karencalulo.wishwait.domain.model.deviceCurrencyCode
 import com.karencalulo.wishwait.domain.repository.ProfileRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
@@ -18,8 +19,6 @@ import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import java.io.IOException
-import java.util.Currency
-import java.util.Locale
 
 class ProfileRepositoryImpl(
     private val dataStore: DataStore<Preferences>,
@@ -78,7 +77,7 @@ class ProfileRepositoryImpl(
         hoursPerMonth = this[Keys.hours] ?: UserProfile.DEFAULT_HOURS_PER_MONTH,
         monthlySavings = this[Keys.savings] ?: 0.0,
         monthlyBills = this[Keys.bills] ?: 0.0,
-        currencyCode = this[Keys.currency] ?: deviceCurrency(),
+        currencyCode = this[Keys.currency] ?: deviceCurrencyCode(),
         strictness = Strictness.entries.firstOrNull { it.name == this[Keys.strictness] } ?: Strictness.BALANCED,
         onboarded = this[Keys.onboarded] ?: false,
         remindersEnabled = this[Keys.reminders] ?: true,
@@ -89,7 +88,4 @@ class ProfileRepositoryImpl(
         paydaySales = this[Keys.paydaySales]?.split(",")?.mapNotNull { it.trim().toIntOrNull() } ?: DEFAULT_PAYDAY_SALES,
         tipsGiven = this[Keys.tipsGiven] ?: 0,
     )
-
-    private fun deviceCurrency(): String =
-        runCatching { Currency.getInstance(Locale.getDefault()).currencyCode }.getOrNull() ?: "USD"
 }
