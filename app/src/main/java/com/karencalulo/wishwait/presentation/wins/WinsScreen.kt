@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -119,7 +120,7 @@ fun WinsScreen(state: WinsState, onOpenWish: (String) -> Unit) {
                 }
             }
             item {
-                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                Row(horizontalArrangement = Arrangement.spacedBy(8.dp), modifier = Modifier.height(IntrinsicSize.Min)) {
                     StatTile("⚡", "${stats.impulseBuys}", stringResource(R.string.wins_early), Modifier.weight(1f))
                     StatTile("⏱️", Fmt.hours(res(), stats.hoursSaved), stringResource(R.string.wins_hours), Modifier.weight(1f))
                     StatTile(
@@ -135,7 +136,10 @@ fun WinsScreen(state: WinsState, onOpenWish: (String) -> Unit) {
             val badges = Achievement.entries.filter { !it.hiddenUntilUnlocked || it in stats.unlocked }
             item { SectionTitle(stringResource(R.string.wins_badges, stats.unlocked.size, badges.size)) }
             item {
-                LazyRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                LazyRow(
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                    contentPadding = PaddingValues(end = 28.dp),
+                ) {
                     items(badges, key = { it.name }) { a ->
                         Badge(a, unlocked = a in stats.unlocked, modifier = Modifier.width(120.dp))
                     }
@@ -187,10 +191,30 @@ private fun HeroStat(emoji: String, value: String, label: String, modifier: Modi
 
 @Composable
 private fun ActivityCalendarGrid(days: List<DayCell>) {
+    if (days.isEmpty()) return
     Column {
-        days.chunked(7).forEach { week ->
+        calendarRangeLabel(days)?.let {
+            Text(it, style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            Spacer(Modifier.height(8.dp))
+        }
+        Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+            mondayStartWeekdayLabels().forEach { label ->
+                Text(
+                    label,
+                    modifier = Modifier.weight(1f),
+                    textAlign = TextAlign.Center,
+                    style = MaterialTheme.typography.labelSmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                )
+            }
+        }
+        Spacer(Modifier.height(4.dp))
+        val padded: List<DayCell?> = List(leadingBlankCount(days.first().dayStart)) { null } + days
+        padded.chunked(7).forEach { week ->
             Row(horizontalArrangement = Arrangement.spacedBy(6.dp), modifier = Modifier.padding(vertical = 3.dp)) {
-                week.forEach { cell -> DayDot(cell, Modifier.weight(1f)) }
+                week.forEach { cell ->
+                    if (cell == null) Spacer(Modifier.weight(1f)) else DayDot(cell, Modifier.weight(1f))
+                }
                 repeat(7 - week.size) { Spacer(Modifier.weight(1f)) }
             }
         }
@@ -198,7 +222,7 @@ private fun ActivityCalendarGrid(days: List<DayCell>) {
         Row(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
             LegendDot(MaterialTheme.colorScheme.tertiaryContainer, stringResource(R.string.wins_calendar_active))
             LegendDot(MaterialTheme.colorScheme.errorContainer, stringResource(R.string.wins_calendar_missed))
-            LegendDot(MaterialTheme.colorScheme.surfaceContainerLow, stringResource(R.string.wins_calendar_none))
+            LegendDot(MaterialTheme.colorScheme.surfaceContainerHigh, stringResource(R.string.wins_calendar_none))
         }
     }
 }
@@ -208,7 +232,7 @@ private fun DayDot(cell: DayCell, modifier: Modifier = Modifier) {
     val color = when (cell.status) {
         DayStatus.MINDFUL -> MaterialTheme.colorScheme.tertiaryContainer
         DayStatus.MISSED -> MaterialTheme.colorScheme.errorContainer
-        DayStatus.NONE -> MaterialTheme.colorScheme.surfaceContainerLow
+        DayStatus.NONE -> MaterialTheme.colorScheme.surfaceContainerHigh
     }
     val day = remember(cell.dayStart) {
         Calendar.getInstance().apply { timeInMillis = cell.dayStart }.get(Calendar.DAY_OF_MONTH)
@@ -252,7 +276,7 @@ private fun Badge(a: Achievement, unlocked: Boolean, modifier: Modifier = Modifi
         modifier = modifier.clearAndSetSemantics { contentDescription = spoken },
         colors = CardDefaults.cardColors(
             containerColor = if (unlocked) MaterialTheme.colorScheme.tertiaryContainer
-            else MaterialTheme.colorScheme.surfaceContainerLow,
+            else MaterialTheme.colorScheme.surfaceContainerHigh,
         ),
     ) {
         Column(

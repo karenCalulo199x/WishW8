@@ -3,7 +3,11 @@ package com.karencalulo.wishwait.presentation.wins
 import com.karencalulo.wishwait.domain.model.DAY_MS
 import com.karencalulo.wishwait.domain.model.Wish
 import com.karencalulo.wishwait.domain.model.WishStatus
+import java.text.DateFormatSymbols
+import java.text.SimpleDateFormat
 import java.util.Calendar
+import java.util.Date
+import java.util.Locale
 
 enum class DayStatus { NONE, MINDFUL, MISSED }
 
@@ -42,6 +46,31 @@ fun buildActivityCalendar(wishes: List<Wish>, now: Long = System.currentTimeMill
             else -> DayCell(day, DayStatus.NONE)
         }
     }
+}
+
+/** Single-letter weekday labels (M T W T F S S), Monday-first, following the device's locale names. */
+fun mondayStartWeekdayLabels(): List<String> {
+    val symbols = DateFormatSymbols.getInstance(Locale.getDefault()).shortWeekdays
+    val order = listOf(
+        Calendar.MONDAY, Calendar.TUESDAY, Calendar.WEDNESDAY, Calendar.THURSDAY,
+        Calendar.FRIDAY, Calendar.SATURDAY, Calendar.SUNDAY,
+    )
+    return order.map { symbols[it].take(1) }
+}
+
+/** Blank cells to prepend so the first real day lands in its correct Monday-first weekday column. */
+fun leadingBlankCount(firstDayStart: Long): Int {
+    val dow = Calendar.getInstance().apply { timeInMillis = firstDayStart }.get(Calendar.DAY_OF_WEEK)
+    return (dow + 5) % 7
+}
+
+private val monthDayFormat = SimpleDateFormat("MMM d", Locale.getDefault())
+
+/** "Sep 20 – Oct 19" style label for the calendar's date range. */
+fun calendarRangeLabel(days: List<DayCell>): String? {
+    val first = days.firstOrNull() ?: return null
+    val last = days.lastOrNull() ?: return null
+    return "${monthDayFormat.format(Date(first.dayStart))} – ${monthDayFormat.format(Date(last.dayStart))}"
 }
 
 /** Days since the last impulse buy (or since the first wish, if there's never been one). Null with no wishes yet. */

@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -273,12 +274,15 @@ fun StatTile(
     value: String,
     label: String,
     modifier: Modifier = Modifier,
-    containerColor: Color = MaterialTheme.colorScheme.surfaceContainerLow,
+    containerColor: Color = MaterialTheme.colorScheme.surfaceContainerHigh,
 ) {
     Surface(
-        modifier = modifier.semantics(mergeDescendants = true) { },
+        modifier = modifier
+            .fillMaxHeight()
+            .semantics(mergeDescendants = true) { },
         shape = MaterialTheme.shapes.large,
         color = containerColor,
+        shadowElevation = 1.dp,
     ) {
         Column(Modifier.padding(horizontal = 14.dp, vertical = 12.dp)) {
             Text(emoji, fontSize = 20.sp, modifier = Modifier.clearAndSetSemantics { })
