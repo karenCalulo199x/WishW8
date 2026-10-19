@@ -303,6 +303,8 @@
     <string name="add_mood">How are you feeling right now?</string>
     <string name="add_mood_sub">Moods drive more purchases than we think</string>
     <string name="add_desire">How badly do you want it?</string>
+    <string name="add_details_show">Add more detail (mood, note)</string>
+    <string name="add_details_hide">Hide extra detail</string>
     <string name="field_note">Note to future me (optional)</string>
     <string name="field_note_placeholder">Why it matters, where you saw it, a link…</string>
     <string name="add_ask">Ask %1$s 🦉</string>

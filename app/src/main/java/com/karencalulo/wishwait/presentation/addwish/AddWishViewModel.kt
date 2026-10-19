@@ -95,6 +95,7 @@ class AddWishViewModel(
             is AddWishIntent.NoteChanged -> setState { copy(note = intent.value.take(280)) }
             is AddWishIntent.DesireChanged -> setState { copy(desire = intent.value) }
             AddWishIntent.AskFriend -> askFriend()
+            AddWishIntent.ToggleDetails -> setState { copy(detailsExpanded = !detailsExpanded) }
             AddWishIntent.BackToForm -> setState { copy(step = AddStep.FORM) }
             is AddWishIntent.AdjustDays -> setState {
                 copy(chosenDays = (chosenDays + intent.delta).coerceIn(0, BuildVerdictUseCase.MAX_DAYS))

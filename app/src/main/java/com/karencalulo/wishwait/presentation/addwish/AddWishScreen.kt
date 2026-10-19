@@ -21,6 +21,7 @@ import androidx.activity.compose.BackHandler
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.slideInVertically
@@ -46,6 +47,8 @@ import androidx.compose.material.icons.automirrored.rounded.ArrowBack
 import androidx.compose.material.icons.rounded.Add
 import androidx.compose.material.icons.rounded.Calculate
 import androidx.compose.material.icons.rounded.Close
+import androidx.compose.material.icons.rounded.ExpandLess
+import androidx.compose.material.icons.rounded.ExpandMore
 import androidx.compose.material.icons.rounded.Remove
 import androidx.compose.material.icons.rounded.TipsAndUpdates
 import androidx.compose.material3.AlertDialog
@@ -345,7 +348,7 @@ private fun WishForm(state: AddWishState, onIntent: (AddWishIntent) -> Unit) {
         }
     }
 
-    FormLabel(stringResource(R.string.kind_title), stringResource(R.string.add_why_sub))
+    FormLabel(stringResource(R.string.kind_title))
     NeedWantPicker(
         isNeed = state.isNeed,
         reasons = state.reasons,
@@ -355,30 +358,43 @@ private fun WishForm(state: AddWishState, onIntent: (AddWishIntent) -> Unit) {
         modifier = Modifier.bringIntoViewRequester(kindBringIntoView),
     )
 
-    FormLabel(stringResource(R.string.add_mood), stringResource(R.string.add_mood_sub))
-    FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-        Mood.entries.forEach { m ->
-            FilterChip(
-                selected = m in state.moods,
-                onClick = { onIntent(AddWishIntent.MoodToggled(m)) },
-                label = { Text("${m.emoji} ${stringResource(m.labelRes)}") },
+    Spacer(Modifier.height(8.dp))
+    TextButton(onClick = { onIntent(AddWishIntent.ToggleDetails) }) {
+        Text(stringResource(if (state.detailsExpanded) R.string.add_details_hide else R.string.add_details_show))
+        Icon(
+            if (state.detailsExpanded) Icons.Rounded.ExpandLess else Icons.Rounded.ExpandMore,
+            contentDescription = null,
+        )
+    }
+
+    AnimatedVisibility(visible = state.detailsExpanded) {
+        Column {
+            FormLabel(stringResource(R.string.add_mood))
+            FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                Mood.entries.forEach { m ->
+                    FilterChip(
+                        selected = m in state.moods,
+                        onClick = { onIntent(AddWishIntent.MoodToggled(m)) },
+                        label = { Text("${m.emoji} ${stringResource(m.labelRes)}") },
+                    )
+                }
+            }
+
+            FormLabel(stringResource(R.string.add_desire))
+            DesirePicker(selected = state.desire, onSelect = { onIntent(AddWishIntent.DesireChanged(it)) })
+
+            Spacer(Modifier.height(16.dp))
+            OutlinedTextField(
+                value = state.note,
+                onValueChange = { onIntent(AddWishIntent.NoteChanged(it)) },
+                label = { Text(stringResource(R.string.field_note)) },
+                placeholder = { Text(stringResource(R.string.field_note_placeholder)) },
+                minLines = 2,
+                maxLines = 4,
+                modifier = Modifier.fillMaxWidth(),
             )
         }
     }
-
-    FormLabel(stringResource(R.string.add_desire))
-    DesirePicker(selected = state.desire, onSelect = { onIntent(AddWishIntent.DesireChanged(it)) })
-
-    Spacer(Modifier.height(16.dp))
-    OutlinedTextField(
-        value = state.note,
-        onValueChange = { onIntent(AddWishIntent.NoteChanged(it)) },
-        label = { Text(stringResource(R.string.field_note)) },
-        placeholder = { Text(stringResource(R.string.field_note_placeholder)) },
-        minLines = 2,
-        maxLines = 4,
-        modifier = Modifier.fillMaxWidth(),
-    )
 
     Spacer(Modifier.height(24.dp))
     Button(
