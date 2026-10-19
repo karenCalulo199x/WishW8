@@ -17,6 +17,7 @@ import com.karencalulo.wishwait.domain.usecase.SetBackupReminderUseCase
 import kotlinx.coroutines.flow.Flow
 import com.karencalulo.wishwait.domain.model.Strictness
 import com.karencalulo.wishwait.domain.model.UserProfile
+import com.karencalulo.wishwait.domain.model.deviceCurrencyCode
 import com.karencalulo.wishwait.domain.usecase.ChangeCurrencyUseCase
 import com.karencalulo.wishwait.domain.usecase.ExportBackupUseCase
 import com.karencalulo.wishwait.domain.usecase.GetProfileUseCase
@@ -36,7 +37,7 @@ data class SettingsState(
     val hours: String = "",
     val savings: String = "",
     val bills: String = "",
-    val currencyCode: String = "USD",
+    val currencyCode: String = deviceCurrencyCode(),
     val strictness: Strictness = Strictness.BALANCED,
     val remindersEnabled: Boolean = true,
     val fetchLinkDetails: Boolean = true,

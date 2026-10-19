@@ -1,13 +1,14 @@
 package com.karencalulo.wishwait.presentation.onboarding
 
 import com.karencalulo.wishwait.domain.model.Strictness
+import com.karencalulo.wishwait.domain.model.deviceCurrencyCode
 
 data class OnboardingState(
     val page: Int = 0,
     val income: String = "",
     val hours: String = "160",
     val savings: String = "",
-    val currencyCode: String = "USD",
+    val currencyCode: String = deviceCurrencyCode(),
     val strictness: Strictness = Strictness.BALANCED,
     val incomeError: Boolean = false,
     val paydays: List<Int> = emptyList(),
