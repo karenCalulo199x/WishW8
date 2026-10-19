@@ -45,8 +45,8 @@ Hello from Ollie! 🦉 This is the first version of WishWait: pause before you b
 ## Category and contact
 - App category: Finance
 - Tags: Budgeting, Personal finance
-- Email: (your public contact email)
-- Privacy policy: (your public link to docs/privacy-policy.html)
+- Email: kaecalulo@gmail.com
+- Privacy policy: https://karencalulo199x.github.io/WishW8/privacy-policy.html
 
 ## Graphics checklist
 - App icon: 512 × 512 PNG (32-bit, under 1 MB)
