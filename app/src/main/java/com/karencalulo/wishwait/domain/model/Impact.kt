@@ -76,6 +76,8 @@ data class Verdict(
     val extraDaysForCutoff: Int = 0,
     /** No payday set: "this month" instead of "this cutoff". */
     val cutoffByMonth: Boolean = false,
+    /** Cooldown boosted because the desire rating was "really want" or higher, not an actual risky mood. */
+    val highDesire: Boolean = false,
 )
 
 data class SavingsPlan(

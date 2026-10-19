@@ -157,6 +157,7 @@
     <string name="msg_big">%1$s is %2$s of a month\'s pay. You\'d trade %3$s of your life for it. Worth it? Maybe! Let\'s find out by waiting.</string>
     <string name="msg_huge">%1$s costs %2$s your monthly income. That\'s %3$s of work — real weeks of your life. If you still want it after the cooldown, it\'s a real want, not a mood.</string>
     <string name="msg_moods">You said you\'re feeling %1$s. Those feelings love to shop, so I added %2$s to the wait.</string>
+    <string name="msg_high_desire">You really want this one. That strong a pull is worth double-checking, so I added %1$s to the wait.</string>
     <string name="msg_sale">About the sale: it\'s designed to rush you. Would you still want it at full price? There\'s always another sale.</string>
     <string name="msg_social">Comparing ourselves to others is the most expensive habit there is. Is this for you, or for them?</string>
     <string name="msg_history">Heads up: you regretted %1$d of your last %2$d rated %3$s buys, so I added %4$s. I\'m learning from you.</string>
@@ -303,8 +304,11 @@
     <string name="add_mood">How are you feeling right now?</string>
     <string name="add_mood_sub">Moods drive more purchases than we think</string>
     <string name="add_desire">How badly do you want it?</string>
-    <string name="add_details_show">Add more detail (mood, note)</string>
-    <string name="add_details_hide">Hide extra detail</string>
+    <string name="add_details_show">Add a note to yourself (optional)</string>
+    <string name="add_details_hide">Hide note</string>
+    <string name="add_desire_sub">Move the slider to rate your desire</string>
+    <string name="desire_end_need">Need</string>
+    <string name="desire_end_want">Want</string>
     <string name="field_note">Note to future me (optional)</string>
     <string name="field_note_placeholder">Why it matters, where you saw it, a link…</string>
     <string name="add_ask">Ask %1$s 🦉</string>

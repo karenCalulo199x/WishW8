@@ -84,7 +84,6 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.karencalulo.wishwait.data.reminder.NotificationHelper
 import com.karencalulo.wishwait.domain.model.Category
 import com.karencalulo.wishwait.domain.model.DAY_MS
-import com.karencalulo.wishwait.domain.model.Mood
 import com.karencalulo.wishwait.domain.model.Reason
 import com.karencalulo.wishwait.domain.model.Tier
 import com.karencalulo.wishwait.domain.model.Verdict
@@ -93,7 +92,7 @@ import com.karencalulo.wishwait.presentation.common.FriendVoice
 import com.karencalulo.wishwait.presentation.common.LocalMoney
 import com.karencalulo.wishwait.presentation.common.appViewModel
 import com.karencalulo.wishwait.presentation.components.ConfettiOverlay
-import com.karencalulo.wishwait.presentation.components.DesirePicker
+import com.karencalulo.wishwait.presentation.components.DesireSlider
 import com.karencalulo.wishwait.presentation.components.NeedWantPicker
 import androidx.compose.foundation.relocation.BringIntoViewRequester
 import androidx.compose.foundation.relocation.bringIntoViewRequester
@@ -360,7 +359,10 @@ private fun WishForm(state: AddWishState, onIntent: (AddWishIntent) -> Unit) {
         modifier = Modifier.bringIntoViewRequester(kindBringIntoView),
     )
 
-    Spacer(Modifier.height(8.dp))
+    FormLabel(stringResource(R.string.add_desire), stringResource(R.string.add_desire_sub))
+    DesireSlider(selected = state.desire, onSelect = { onIntent(AddWishIntent.DesireChanged(it)) })
+
+    Spacer(Modifier.height(16.dp))
     TextButton(onClick = { onIntent(AddWishIntent.ToggleDetails) }) {
         Text(stringResource(if (state.detailsExpanded) R.string.add_details_hide else R.string.add_details_show))
         Icon(
@@ -371,21 +373,6 @@ private fun WishForm(state: AddWishState, onIntent: (AddWishIntent) -> Unit) {
 
     AnimatedVisibility(visible = state.detailsExpanded) {
         Column {
-            FormLabel(stringResource(R.string.add_mood))
-            FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                Mood.entries.forEach { m ->
-                    FilterChip(
-                        selected = m in state.moods,
-                        onClick = { onIntent(AddWishIntent.MoodToggled(m)) },
-                        label = { Text("${m.emoji} ${stringResource(m.labelRes)}") },
-                    )
-                }
-            }
-
-            FormLabel(stringResource(R.string.add_desire))
-            DesirePicker(selected = state.desire, onSelect = { onIntent(AddWishIntent.DesireChanged(it)) })
-
-            Spacer(Modifier.height(16.dp))
             OutlinedTextField(
                 value = state.note,
                 onValueChange = { onIntent(AddWishIntent.NoteChanged(it)) },

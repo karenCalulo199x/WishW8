@@ -56,7 +56,6 @@ sealed interface AddWishIntent {
     data class CategorySelected(val value: Category) : AddWishIntent
     data class KindChanged(val isNeed: Boolean) : AddWishIntent
     data class ReasonToggled(val value: Reason) : AddWishIntent
-    data class MoodToggled(val value: Mood) : AddWishIntent
     data class NoteChanged(val value: String) : AddWishIntent
     data class DesireChanged(val value: Int) : AddWishIntent
     data object AskFriend : AddWishIntent

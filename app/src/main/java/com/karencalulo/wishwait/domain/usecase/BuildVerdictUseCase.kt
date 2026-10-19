@@ -19,7 +19,8 @@ import kotlin.math.roundToInt
  *
  * - Base days grow with the price tier (1 day for a treat, 30 days for months of salary).
  * - Real needs halve the wait: the goal is to avoid impulse buys, not necessities.
- * - Risky moods add 50% (min +1 day): feelings fade, wants that survive them are real.
+ * - Risky moods, or a "really want" / "must have" desire rating, add 50% (min +1 day):
+ *   feelings fade, wants that survive them are real.
  * - Regretted past buys in the same category add 3–7 days: the app learns from you.
  * - Wants only (never real needs, never a 0-day treat): sale day +2 (+3 for 9.9–12.12),
  *   payday window +2, and +3 if this would push wants past the line for this cutoff.
@@ -35,15 +36,18 @@ class BuildVerdictUseCase {
         history: RegretHistory? = null,
         timing: SpendingContext = SpendingContext.NONE,
         cutoff: CutoffSpending? = null,
+        desire: Int = 3,
     ): Verdict {
         val isNeed = isNeedPurchase(reasons)
         val riskyMoods = moods.filter { it.isRisky }
+        val highDesire = riskyMoods.isEmpty() && desire >= HIGH_DESIRE_THRESHOLD
+        val boostTriggered = riskyMoods.isNotEmpty() || highDesire
 
         var days = impact.tier.baseDays * strictness.multiplier
         if (isNeed) days /= 2.0
 
         var extraForMood = 0
-        if (riskyMoods.isNotEmpty()) {
+        if (boostTriggered) {
             val boosted = ceil(days * 1.5).coerceAtLeast(days + 1)
             extraForMood = (boosted - days).roundToInt()
             days = boosted
@@ -52,7 +56,7 @@ class BuildVerdictUseCase {
         val regretBonus = history?.bonusDays ?: 0
         var finalDays = days.roundToInt() + regretBonus
         // A calm, needed, tiny purchase needs no wait at all (unless this category has burned you before).
-        if (impact.tier == Tier.TREAT && riskyMoods.isEmpty() && regretBonus == 0 &&
+        if (impact.tier == Tier.TREAT && !boostTriggered && regretBonus == 0 &&
             (isNeed || strictness == Strictness.CHILL)
         ) {
             finalDays = 0
@@ -82,6 +86,7 @@ class BuildVerdictUseCase {
             recommendedDays = finalDays.coerceAtMost(MAX_DAYS),
             isNeed = isNeed,
             riskyMoods = riskyMoods,
+            highDesire = highDesire,
             onSale = Reason.ON_SALE in reasons,
             socialPressure = Reason.EVERYONE_HAS_IT in reasons || Reason.SAW_AN_AD in reasons,
             extraDaysForMood = extraForMood,
@@ -101,6 +106,7 @@ class BuildVerdictUseCase {
 
     companion object {
         const val MAX_DAYS = 90
+        const val HIGH_DESIRE_THRESHOLD = 4
         const val PAYDAY_DAYS = 2
         const val SALE_DAYS = 2
         const val MEGA_SALE_DAYS = 3

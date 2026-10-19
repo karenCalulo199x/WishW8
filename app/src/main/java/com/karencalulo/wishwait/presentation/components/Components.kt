@@ -28,6 +28,7 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Slider
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -71,6 +72,7 @@ import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.semantics
 import com.karencalulo.wishwait.presentation.common.LocalMoney
 import kotlin.math.PI
+import kotlin.math.roundToInt
 import kotlin.math.sin
 import kotlin.random.Random
 
@@ -413,6 +415,75 @@ fun DesirePicker(
             color = MaterialTheme.colorScheme.primary,
             modifier = Modifier.align(Alignment.CenterHorizontally),
         )
+    }
+}
+
+/** "How badly do you want it" as a Need ↔ Want emoji slider, for the new-wish form. */
+@OptIn(androidx.compose.material3.ExperimentalMaterial3Api::class)
+@Composable
+fun DesireSlider(
+    selected: Int,
+    onSelect: (Int) -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    Column(modifier) {
+        Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
+            Text(
+                stringResource(R.string.desire_end_need),
+                style = MaterialTheme.typography.labelLarge,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
+            Text(
+                stringResource(R.string.desire_end_want),
+                style = MaterialTheme.typography.labelLarge,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
+        }
+        val desireDescription = stringResource(R.string.cd_desire_option, stringResource(desireLabelRes(selected)), selected)
+        Slider(
+            value = selected.toFloat(),
+            onValueChange = { onSelect(it.roundToInt().coerceIn(1, 5)) },
+            valueRange = 1f..5f,
+            steps = 3,
+            modifier = Modifier
+                .fillMaxWidth()
+                .semantics { contentDescription = desireDescription },
+            thumb = {
+                Box(
+                    contentAlignment = Alignment.Center,
+                    modifier = Modifier
+                        .size(44.dp)
+                        .clip(CircleShape)
+                        .background(MaterialTheme.colorScheme.primaryContainer),
+                ) {
+                    Text(FriendVoice.desireEmoji(selected), fontSize = 22.sp, modifier = Modifier.clearAndSetSemantics { })
+                }
+            },
+        )
+        Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
+            (1..5).forEach { level ->
+                Text(
+                    FriendVoice.desireEmoji(level),
+                    fontSize = 16.sp,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier
+                        .weight(1f)
+                        .clearAndSetSemantics { },
+                )
+            }
+        }
+        Spacer(Modifier.height(8.dp))
+        Surface(
+            shape = MaterialTheme.shapes.small,
+            color = MaterialTheme.colorScheme.tertiaryContainer,
+            modifier = Modifier.align(Alignment.CenterHorizontally),
+        ) {
+            Text(
+                "${FriendVoice.desireEmoji(selected)} ${stringResource(desireLabelRes(selected))}",
+                style = MaterialTheme.typography.labelLarge,
+                modifier = Modifier.padding(horizontal = 14.dp, vertical = 8.dp),
+            )
+        }
     }
 }
 

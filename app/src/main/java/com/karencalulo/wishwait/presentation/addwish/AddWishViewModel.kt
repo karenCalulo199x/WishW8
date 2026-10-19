@@ -91,7 +91,6 @@ class AddWishViewModel(
                 // Only reasons that match the current choice can be picked.
                 if (intent.value.isNeed != isNeed) this else copy(reasons = reasons.toggle(intent.value), needReasonError = false)
             }
-            is AddWishIntent.MoodToggled -> setState { copy(moods = moods.toggle(intent.value)) }
             is AddWishIntent.NoteChanged -> setState { copy(note = intent.value.take(280)) }
             is AddWishIntent.DesireChanged -> setState { copy(desire = intent.value) }
             AddWishIntent.AskFriend -> askFriend()
@@ -180,6 +179,7 @@ class AddWishViewModel(
             reasons = s.reasons,
             moods = s.moods,
             strictness = s.profile.strictness,
+            desire = s.desire,
             history = history,
             timing = spendingContext(s.profile),
             cutoff = cutoffSpending(pastWishes, s.profile),

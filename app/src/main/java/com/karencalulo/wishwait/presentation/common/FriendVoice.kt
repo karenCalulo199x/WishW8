@@ -65,6 +65,8 @@ object FriendVoice {
         if (v.riskyMoods.isNotEmpty()) {
             val moods = v.riskyMoods.joinToString(", ") { res.getString(it.labelRes).lowercase() }
             parts += res.getString(R.string.msg_moods, moods, Fmt.days(res, v.extraDaysForMood))
+        } else if (v.highDesire) {
+            parts += res.getString(R.string.msg_high_desire, Fmt.days(res, v.extraDaysForMood))
         }
         if (v.onSale) parts += res.getString(R.string.msg_sale)
         if (v.socialPressure) parts += res.getString(R.string.msg_social)
